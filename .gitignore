@@ -16,3 +16,8 @@ node_modules
 infra/cloud-run/config.env
 infra/cloud-run/config.env.*
 *-key.json
+# みらい議会＠小諸市 パイプライン
+komoro/pipeline/.env
+komoro/pipeline/downloads/
+komoro/pipeline/logs/
+komoro/pipeline/state/
