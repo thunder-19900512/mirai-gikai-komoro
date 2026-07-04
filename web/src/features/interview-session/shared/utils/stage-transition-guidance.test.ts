@@ -6,7 +6,7 @@ import {
 } from "./stage-transition-guidance";
 
 const sampleQuestions = [
-  { id: "q1", question: "この法案についてどう思いますか？" },
+  { id: "q1", question: "この議案についてどう思いますか？" },
   { id: "q2", question: "業務への影響はありますか？" },
   { id: "q3", question: "改善案はありますか？" },
 ];

@@ -14,9 +14,9 @@ export function registerMiraiStanceTools(server: McpServer): void {
   server.registerTool(
     "get_mirai_stance",
     {
-      title: "チームみらいの賛否を取得",
+      title: "スタンスを取得（小諸版は未使用）",
       description:
-        "指定議案に対するチームみらいの賛否スタンス(mirai_stances)を返す。未設定なら stance=null。差分反映（既に同じ賛否が設定済みなら再提案・再反映しない）の判定に使う。",
+        "指定議案に対するスタンス(mirai_stances)を返す。小諸市版では公選法配慮のため通常未使用。未設定なら stance=null。差分反映（既に同じ賛否が設定済みなら再提案・再反映しない）の判定に使う。",
       inputSchema: {
         billId: z.string().uuid(),
       },
@@ -33,9 +33,9 @@ export function registerMiraiStanceTools(server: McpServer): void {
   server.registerTool(
     "upsert_mirai_stance",
     {
-      title: "チームみらいの賛否を設定",
+      title: "スタンスを設定（小諸版は未使用）",
       description:
-        "指定議案に対するチームみらいの賛否スタンスをupsertする（1議案につき1件）。既存スタンスがあれば type / comment を更新し、なければ新規作成する。type は for / against / neutral / conditional_for / conditional_against / considering / continued_deliberation のいずれか。",
+        "指定議案に対するスタンスをupsertする（小諸市版では公選法配慮のため通常未使用）（1議案につき1件）。既存スタンスがあれば type / comment を更新し、なければ新規作成する。type は for / against / neutral / conditional_for / conditional_against / considering / continued_deliberation のいずれか。",
       inputSchema: {
         billId: z.string().uuid(),
         ...stanceInputSchema.shape,

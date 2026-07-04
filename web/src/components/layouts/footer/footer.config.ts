@@ -19,18 +19,18 @@ export const primaryLinks: FooterLink[] = [
     href: routes.home(),
   },
   {
-    label: "みらい議会とは",
+    label: "このサイトについて",
     href: EXTERNAL_LINKS.ABOUT_NOTE,
     external: true,
   },
   {
-    label: "チームみらいについて",
-    href: EXTERNAL_LINKS.TEAM_MIRAI_ABOUT,
+    label: "小諸市議会（公式）",
+    href: EXTERNAL_LINKS.KOMORO_GIKAI,
     external: true,
   },
   {
-    label: "寄附で応援する",
-    href: EXTERNAL_LINKS.DONATION,
+    label: "本家「みらい議会」",
+    href: EXTERNAL_LINKS.HONKE_GIKAI,
     external: true,
   },
 ];

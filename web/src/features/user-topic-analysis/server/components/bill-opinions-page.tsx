@@ -33,7 +33,7 @@ export async function BillOpinionsPage({ billId }: BillOpinionsPageProps) {
   const nowMs = Date.now();
 
   const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "法案詳細", href: routes.billDetail(billId) },
+    { label: "議案詳細", href: routes.billDetail(billId) },
     { label: "インタビュー回答一覧" },
   ];
 
@@ -41,7 +41,7 @@ export async function BillOpinionsPage({ billId }: BillOpinionsPageProps) {
     <div className="min-h-dvh bg-mirai-surface pt-24 md:pt-0">
       <Container>
         <div className="flex flex-col gap-8 pb-8 md:pt-8">
-          {/* パンくず + 法案タイトル */}
+          {/* パンくず + 議案タイトル */}
           <div className="flex flex-col gap-2">
             <Breadcrumb items={breadcrumbItems} />
             <Link

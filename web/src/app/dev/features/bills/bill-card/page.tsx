@@ -17,9 +17,9 @@ export default function BillCardPreview() {
     bill_content: {
       id: "mock-content-featured",
       bill_id: "mock-featured",
-      title: "注目の法案タイトル",
+      title: "注目の議案タイトル",
       summary:
-        "注目フラグが立っている法案のカード表示。注目バッジが表示されます。",
+        "注目フラグが立っている議案のカード表示。注目バッジが表示されます。",
       content: "",
       difficulty_level: "normal",
       created_at: "2026-02-15T00:00:00Z",
@@ -41,7 +41,7 @@ export default function BillCardPreview() {
       title:
         "デジタル社会の形成を図るための関係法律の整備に関する法律の一部を改正する法律案についての補足的な検討事項を含む修正案",
       summary:
-        "この法案は開発プレビュー用のサンプルデータです。法案の要約文がここに表示されます。",
+        "この議案は開発プレビュー用のサンプルデータです。議案の要約文がここに表示されます。",
       content: "",
       difficulty_level: "normal",
       created_at: "2026-02-15T00:00:00Z",
@@ -55,9 +55,9 @@ export default function BillCardPreview() {
     bill_content: {
       id: "mock-content-long-desc",
       bill_id: "mock-long-desc",
-      title: "サンプル法案のタイトル",
+      title: "サンプル議案のタイトル",
       summary:
-        "この法案はデジタル社会の形成を推進するため、行政手続のオンライン化、マイナンバーカードの利活用促進、データの標準化・連携基盤の整備、サイバーセキュリティ対策の強化、個人情報保護制度の見直し、AI技術の適正利用に関するガイドラインの策定、地方自治体のDX推進支援、デジタルデバイド解消のための施策等について、関係する複数の法律を一括して改正するものです。特に高齢者や障害者を含む全ての国民がデジタル化の恩恵を享受できる社会の実現を目指しています。",
+        "この議案はデジタル社会の形成を推進するため、行政手続のオンライン化、マイナンバーカードの利活用促進、データの標準化・連携基盤の整備、サイバーセキュリティ対策の強化、個人情報保護制度の見直し、AI技術の適正利用に関するガイドラインの策定、地方自治体のDX推進支援、デジタルデバイド解消のための施策等について、関係する複数の法律を一括して改正するものです。特に高齢者や障害者を含む全ての国民がデジタル化の恩恵を享受できる社会の実現を目指しています。",
       content: "",
       difficulty_level: "normal",
       created_at: "2026-02-15T00:00:00Z",
@@ -69,7 +69,7 @@ export default function BillCardPreview() {
     <>
       <h1 className="text-3xl font-bold text-mirai-text mb-8">BillCard</h1>
 
-      <ComponentShowcase title="Default" description="基本的な法案カード">
+      <ComponentShowcase title="Default" description="基本的な議案カード">
         <PreviewSection label="通常表示">
           <BillCard bill={defaultBill} />
         </PreviewSection>
@@ -101,7 +101,7 @@ export default function BillCardPreview() {
 
       <ComponentShowcase
         title="All Statuses"
-        description="全法案ステータスの表示"
+        description="全議案ステータスの表示"
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {allBillStatuses.map((status) => (

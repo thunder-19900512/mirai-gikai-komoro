@@ -41,7 +41,7 @@ describe("buildCompletedInterviewReportInsert", () => {
         {
           id: "message-user-1",
           role: "user",
-          content: "この法案に賛成です",
+          content: "この議案に賛成です",
         },
       ],
       reportData,
@@ -63,7 +63,7 @@ describe("buildCompletedInterviewReportInsert", () => {
     );
     expect(insert.opinions).toEqual([
       expect.objectContaining({
-        source_message_content: "この法案に賛成です",
+        source_message_content: "この議案に賛成です",
       }),
     ]);
   });

@@ -11,7 +11,7 @@ const BILL_REQUIRED_KEYS = [
   "billContent",
 ] as const;
 
-/** 法案チャットプロンプトの必須変数を検証する */
+/** 議案チャットプロンプトの必須変数を検証する */
 function validateBillVariables(v: PromptVariables, promptName: string): void {
   const missing = BILL_REQUIRED_KEYS.filter((key) => !(key in v));
   if (missing.length > 0) {

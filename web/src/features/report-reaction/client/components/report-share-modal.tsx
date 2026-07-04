@@ -91,7 +91,7 @@ export function ReportShareModal({
           {/* シェアセクション */}
           <div className="flex w-full flex-col items-center gap-4">
             <p className="text-center text-base font-bold text-gray-800">
-              法案に対する意見をシェアしよう
+              議案に対する意見をシェアしよう
             </p>
 
             {/* SNSアイコン */}

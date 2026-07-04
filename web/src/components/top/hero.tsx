@@ -6,7 +6,7 @@ export function Hero() {
     <div className="relative w-full h-[80vh] min-h-[400px] md:h-[70vh]">
       <Image
         src="/img/hero_background.png"
-        alt="国会議事堂"
+        alt="小諸市の風景"
         fill
         priority
         className="object-cover"
@@ -16,10 +16,12 @@ export function Hero() {
       <div className="absolute bottom-[30vh] left-0 right-0 py-4">
         <Container>
           <p className="font-bold text-xl md:text-2xl leading-relaxed">
-            いま国会で議論されていること <br />
+            いま小諸市議会で議論されていること <br />
             やさしい言葉で説明します
           </p>
-          <p className="mt-2 font-lexend text-xs">powered by Team Mirai & AI</p>
+          <p className="mt-2 font-lexend text-xs">
+            based on Mirai Gikai (Team Mirai OSS) & AI
+          </p>
         </Container>
       </div>
 

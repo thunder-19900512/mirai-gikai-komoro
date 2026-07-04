@@ -13,7 +13,7 @@ export async function generateMetadata({
 }: OpinionsPageProps): Promise<Metadata> {
   const { id } = await params;
   const bill = await getBillById(id);
-  const title = bill?.bill_content?.title || bill?.name || "法案";
+  const title = bill?.bill_content?.title || bill?.name || "議案";
 
   return {
     title: `AIインタビューの回答一覧 - ${title}`,

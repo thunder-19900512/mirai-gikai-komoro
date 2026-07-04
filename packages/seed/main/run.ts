@@ -122,9 +122,9 @@ async function seedDatabase() {
       string,
       { knowledge_source: string; use_knowledge_source_in_chat: boolean }
     > = {
-      "ガソリン税暫定税率廃止法案": {
+      "ガソリン税暫定税率廃止議案": {
         knowledge_source:
-          "この法案についてあなたの意見を聞かせてください。",
+          "この議案についてあなたの意見を聞かせてください。",
         use_knowledge_source_in_chat: true,
       },
       "船荷証券の電子化に関する法律案": {
@@ -408,7 +408,7 @@ async function seedDatabase() {
       console.log("⚠️ Skipped interview config (no bills found)");
     }
 
-    // === 船荷証券法案のインタビューデータ（トピック解析テスト用）===
+    // === 船荷証券議案のインタビューデータ（トピック解析テスト用）===
     console.log("🚢 Inserting shipping bill interview data...");
     const shippingConfig = createShippingBillInterviewConfig(insertedBills);
     let shippingSessionsCount = 0;

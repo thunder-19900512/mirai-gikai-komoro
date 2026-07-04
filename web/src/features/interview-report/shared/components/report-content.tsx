@@ -110,7 +110,7 @@ export function ReportContent({
             shareMessage={share.shareMessage}
           />
         )}
-        {/* 法案の記事に戻るボタン */}
+        {/* 議案の記事に戻るボタン */}
         <BackToBillButton billId={billId} from={from} />
         {/* 問題を報告する */}
         <ReportProblemButton />

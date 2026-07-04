@@ -11,7 +11,7 @@ import { archiveInterviewSession } from "../../server/actions/archive-interview-
  *
  * レポート未生成のまま終了するとセッションが active（=「中断中」）のまま残り、
  * 中断扱い・再開導線が表示されてしまう。終了時はセッションをアーカイブして
- * status を none にし、中断扱いを解消したうえで法案詳細ページへ遷移する。
+ * status を none にし、中断扱いを解消したうえで議案詳細ページへ遷移する。
  * アーカイブに失敗してもユーザーは離脱させる（status が変わらなくても致命的ではない）。
  */
 export function useEndInterview(

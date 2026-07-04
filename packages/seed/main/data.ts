@@ -18,10 +18,10 @@ type InterviewMessageInsert =
 type InterviewReportInsert =
   Database["public"]["Tables"]["interview_report"]["Insert"];
 
-// 国会会期データ
+// 市議会会期データ
 export const dietSessions: DietSessionInsert[] = [
   {
-    name: "第219回国会（臨時会）",
+    name: "第219回市議会（臨時会）",
     slug: "219-rinji",
     shugiin_url:
       "https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm",
@@ -29,7 +29,7 @@ export const dietSessions: DietSessionInsert[] = [
     end_date: "2025-12-17",
   },
   {
-    name: "第218回国会（臨時会）",
+    name: "第218回市議会（臨時会）",
     slug: "218-rinji",
     shugiin_url:
       "https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm",
@@ -42,54 +42,54 @@ export const dietSessions: DietSessionInsert[] = [
 export const tags: TagInsert[] = [
   {
     label: "エネルギー・環境",
-    description: "エネルギー政策、環境保護、気候変動対策に関する法案",
+    description: "エネルギー政策、環境保護、気候変動対策に関する議案",
     featured_priority: 1,
   },
   {
     label: "子育て・教育",
-    description: "子育て支援、教育政策、若者支援に関する法案",
+    description: "子育て支援、教育政策、若者支援に関する議案",
     featured_priority: 2,
   },
   {
     label: "選挙・政治改革",
-    description: "選挙制度、政治改革、民主主義の強化に関する法案",
+    description: "選挙制度、政治改革、民主主義の強化に関する議案",
     featured_priority: 3,
   },
 ];
 
 export const bills: BillInsert[] = [
   {
-    name: "ガソリン税暫定税率廃止法案",
+    name: "ガソリン税暫定税率廃止議案",
     originating_house: "HR",
     status: "in_originating_house",
-    status_note: "衆議院で審議中",
+    status_note: "小諸市議会で審議中",
     submitted_date: "2025-08-01T09:00:00+09:00",
     publish_status: "published",
     is_featured: true,
     thumbnail_url: "https://placehold.co/600x400.png",
   },
   {
-    name: "こども家庭庁予算大幅増額法案",
+    name: "こども家庭庁予算大幅増額議案",
     originating_house: "HC",
     status: "enacted",
-    status_note: "両院で可決、成立",
+    status_note: "本会議で可決、成立",
     submitted_date: "2025-01-20T10:00:00+09:00",
     publish_status: "published",
     is_featured: true,
     thumbnail_url: "https://placehold.co/600x400.png",
   },
   {
-    name: "18歳選挙権完全実施法案",
+    name: "18歳選挙権完全実施議案",
     originating_house: "HR",
     status: "rejected",
-    status_note: "衆議院で否決",
+    status_note: "本会議で否決",
     submitted_date: "2025-02-01T09:00:00+09:00",
     publish_status: "published",
     is_featured: false,
     thumbnail_url: "https://placehold.co/600x400.png",
   },
   {
-    name: "学校給食無償化促進法案",
+    name: "学校給食無償化促進議案",
     originating_house: "HC",
     status: "enacted",
     status_note: "両院で可決、4月から実施",
@@ -98,14 +98,14 @@ export const bills: BillInsert[] = [
     is_featured: false,
     thumbnail_url: "https://placehold.co/600x400.png",
   },
-  // 第218回国会用の追加法案（デザイン確認用）- ループで生成
+  // 第218回市議会用の追加議案（デザイン確認用）- ループで生成
   ...Array.from({ length: 4 }, (_, i) => ({
-    name: `学校給食無償化促進法案（第${i + 2}号）`,
+    name: `学校給食無償化促進議案（第${i + 2}号）`,
     originating_house: (i % 2 === 0 ? "HR" : "HC") as "HR" | "HC",
     status: (i % 2 === 0 ? "enacted" : "in_originating_house") as
       | "enacted"
       | "in_originating_house",
-    status_note: i % 2 === 0 ? "両院で可決、成立" : "参議院で審議中",
+    status_note: i % 2 === 0 ? "本会議で可決、成立" : "小諸市議会で審議中",
     submitted_date: `2025-08-0${i + 1}T09:00:00+09:00`,
     publish_status: "published" as const,
     is_featured: false,
@@ -115,17 +115,17 @@ export const bills: BillInsert[] = [
     name: "船荷証券の電子化に関する法律案",
     originating_house: "HR",
     status: "in_originating_house",
-    status_note: "衆議院で審議中",
+    status_note: "小諸市議会で審議中",
     submitted_date: "2025-09-15T09:00:00+09:00",
     publish_status: "published",
     is_featured: false,
     thumbnail_url: "https://placehold.co/600x400.png",
   },
   {
-    name: "中学生・高校生向けプログラミング教育必修化法案",
+    name: "中学生・高校生向けプログラミング教育必修化議案",
     originating_house: "HR",
     status: "rejected",
-    status_note: "衆議院本会議で否決",
+    status_note: "本会議で否決",
     submitted_date: "2024-11-15T10:00:00+09:00",
     publish_status: "published",
     is_featured: false,
@@ -141,19 +141,19 @@ export function createBillsTags(
   insertedTags: { id: string; label: string }[]
 ): Omit<BillsTagsInsert, "id" | "created_at">[] {
   const billTagMap: { [billName: string]: string[] } = {
-    "ガソリン税暫定税率廃止法案": ["エネルギー・環境"],
-    "こども家庭庁予算大幅増額法案": ["子育て・教育"],
-    "18歳選挙権完全実施法案": ["選挙・政治改革"],
-    "学校給食無償化促進法案": ["子育て・教育"],
-    // 第218回国会用の追加法案（デザイン確認用）
+    "ガソリン税暫定税率廃止議案": ["エネルギー・環境"],
+    "こども家庭庁予算大幅増額議案": ["子育て・教育"],
+    "18歳選挙権完全実施議案": ["選挙・政治改革"],
+    "学校給食無償化促進議案": ["子育て・教育"],
+    // 第218回市議会用の追加議案（デザイン確認用）
     ...Object.fromEntries(
       Array.from({ length: 4 }, (_, i) => [
-        `学校給食無償化促進法案（第${i + 2}号）`,
+        `学校給食無償化促進議案（第${i + 2}号）`,
         ["子育て・教育"],
       ])
     ),
     "船荷証券の電子化に関する法律案": ["エネルギー・環境"],
-    "中学生・高校生向けプログラミング教育必修化法案": ["子育て・教育"],
+    "中学生・高校生向けプログラミング教育必修化議案": ["子育て・教育"],
   };
 
   const billsTags: Omit<BillsTagsInsert, "id" | "created_at">[] = [];
@@ -176,30 +176,30 @@ export function createBillsTags(
 
 const miraiStancesData: Omit<MiraiStanceInsert, "bill_id">[] = [
   {
-    // ガソリン税暫定税率廃止法案に対する見解
+    // ガソリン税暫定税率廃止議案に対する見解
     type: "for",
-    comment: `私たちは、家計の負担を軽くするこの法案に賛成します。
+    comment: `私たちは、家計の負担を軽くするこの議案に賛成します。
 
 特に車が必要な地方の人たちには大きなメリットがあります。ただし、環境問題や道路整備の予算についても同時に考える必要があります。
 
 電気自動車の普及促進など、環境に優しい対策もセットで進めるべきです。`,
   },
   {
-    // こども家庭庁予算大幅増額法案に対する見解
+    // こども家庭庁予算大幅増額議案に対する見解
     type: "for",
-    comment: `少子化対策は国の最重要課題の一つです。この法案による児童手当の増額と保育の無償化は、子育て世代の経済的負担を大幅に軽減します。
+    comment: `少子化対策は国の最重要課題の一つです。この議案による児童手当の増額と保育の無償化は、子育て世代の経済的負担を大幅に軽減します。
 
 特に第3子以降への手厚い支援は、出生率向上に効果的だと考えます。財源確保についても企業の子ども支援金など、社会全体で支える仕組みが評価できます。`,
   },
   {
-    // 18歳選挙権完全実施法案に対する見解
+    // 18歳選挙権完全実施議案に対する見解
     type: "for",
     comment: `18歳選挙権が導入されても、若者の投票率が低いままでは意味がありません。
 
-この法案による主権者教育の充実と投票環境の改善は、民主主義の質を高める重要な取り組みです。デジタルネイティブ世代に合わせた情報提供の現代化も評価できます。`,
+この議案による主権者教育の充実と投票環境の改善は、民主主義の質を高める重要な取り組みです。デジタルネイティブ世代に合わせた情報提供の現代化も評価できます。`,
   },
   {
-    // 学校給食無償化促進法案に対する見解
+    // 学校給食無償化促進議案に対する見解
     type: "for",
     comment: `学校給食の無償化は、子育て支援と教育の充実を同時に実現する重要な政策です。
 
@@ -214,7 +214,7 @@ const miraiStancesData: Omit<MiraiStanceInsert, "bill_id">[] = [
 
 国際条約（MLETR）との整合性を保ちつつ、段階的な導入と十分なサポート体制の構築を条件に賛成します。`,
   },
-  // 第218回国会用の追加法案（デザイン確認用）- 同じ見解を4件追加
+  // 第218回市議会用の追加議案（デザイン確認用）- 同じ見解を4件追加
   ...Array.from({ length: 4 }, () => ({
     type: "for" as const,
     comment: `学校給食の無償化は、子育て支援と教育の充実を同時に実現する重要な政策です。
@@ -222,7 +222,7 @@ const miraiStancesData: Omit<MiraiStanceInsert, "bill_id">[] = [
 全ての子どもが質の高い食事を平等に受けられることは、健康格差の解消にもつながります。地産地消の推進により地域経済の活性化も期待できます。`,
   })),
   {
-    // プログラミング教育必修化法案に対する見解
+    // プログラミング教育必修化議案に対する見解
     type: "against",
     comment: `デジタル人材の育成は重要ですが、準備不足での拙速な必修化には反対です。
 
@@ -239,7 +239,7 @@ export function createMiraiStances(
   }));
 }
 
-// インタビュー設定を作成（最初の法案用）
+// インタビュー設定を作成（最初の議案用）
 export function createInterviewConfig(
   insertedBills: { id: string; name: string }[]
 ): Omit<InterviewConfigInsert, "id" | "created_at" | "updated_at"> | null {
@@ -261,7 +261,7 @@ export function createInterviewQuestions(
   return [
     {
       interview_config_id: interviewConfigId,
-      question: "この法案に賛成ですか？反対ですか？",
+      question: "この議案に賛成ですか？反対ですか？",
       follow_up_guide: "ユーザーの立場を明確にしてください。",
       quick_replies: ["賛成", "反対", "どちらでもない"],
       question_order: 1,
@@ -349,7 +349,7 @@ export function createInterviewMessages(
   const conversations = [
     // パターン1: 賛成（完了 + レポートあり）
     [
-      { role: "assistant" as const, content: "この法案に賛成ですか？反対ですか？" },
+      { role: "assistant" as const, content: "この議案に賛成ですか？反対ですか？" },
       { role: "user" as const, content: "賛成です" },
       { role: "assistant" as const, content: "その理由を教えてください。" },
       { role: "user" as const, content: "なぜなら賛成だからです。国民のためになると思います。" },
@@ -357,7 +357,7 @@ export function createInterviewMessages(
     ],
     // パターン2: 反対（完了 + レポートあり）
     [
-      { role: "assistant" as const, content: "この法案に賛成ですか？反対ですか？" },
+      { role: "assistant" as const, content: "この議案に賛成ですか？反対ですか？" },
       { role: "user" as const, content: "反対です" },
       { role: "assistant" as const, content: "その理由を教えてください。" },
       { role: "user" as const, content: "財源が不明確だと思います。" },
@@ -365,7 +365,7 @@ export function createInterviewMessages(
     ],
     // パターン3: どちらでもない（完了 + レポートあり）
     [
-      { role: "assistant" as const, content: "この法案に賛成ですか？反対ですか？" },
+      { role: "assistant" as const, content: "この議案に賛成ですか？反対ですか？" },
       { role: "user" as const, content: "どちらでもないです" },
       { role: "assistant" as const, content: "その理由を教えてください。" },
       { role: "user" as const, content: "もっと情報が必要だと思います。" },
@@ -373,15 +373,15 @@ export function createInterviewMessages(
     ],
     // パターン4: 完了したけどレポート未作成
     [
-      { role: "assistant" as const, content: "この法案に賛成ですか？反対ですか？" },
+      { role: "assistant" as const, content: "この議案に賛成ですか？反対ですか？" },
       { role: "user" as const, content: "賛成です" },
       { role: "assistant" as const, content: "その理由を教えてください。" },
-      { role: "user" as const, content: "良い法案だと思います。" },
+      { role: "user" as const, content: "良い議案だと思います。" },
       { role: "assistant" as const, content: "ありがとうございました。ご意見を承りました。" },
     ],
     // パターン5: 進行中（途中で離脱）
     [
-      { role: "assistant" as const, content: "この法案に賛成ですか？反対ですか？" },
+      { role: "assistant" as const, content: "この議案に賛成ですか？反対ですか？" },
       { role: "user" as const, content: "うーん、ちょっと考えさせてください" },
     ],
   ];
@@ -412,10 +412,10 @@ export function createInterviewReports(
     {
       stance: "for" as const,
       summary:
-        "この法案は国民生活の安定に寄与する重要な施策であり、賛成の立場をとる。特に物価高騰に苦しむ家庭への経済的支援効果が大きく、社会保障の充実と合わせて早期の成立を望む。",
+        "この議案は国民生活の安定に寄与する重要な施策であり、賛成の立場をとる。特に物価高騰に苦しむ家庭への経済的支援効果が大きく、社会保障の充実と合わせて早期の成立を望む。",
       role: "general_citizen" as const,
       role_title: "一般市民",
-      role_description: "法案の内容に賛同する市民",
+      role_description: "議案の内容に賛同する市民",
       opinions: [{ title: "賛成理由", content: "国民のためになる" }],
     },
     {
@@ -430,7 +430,7 @@ export function createInterviewReports(
     {
       stance: "neutral" as const,
       summary:
-        "現時点では法案の効果と副作用について十分な情報が開示されておらず、賛否を判断するには時期尚早と考える。特に地方経済への影響や長期的な財政見通しについてより詳細な分析が必要。",
+        "現時点では議案の効果と副作用について十分な情報が開示されておらず、賛否を判断するには時期尚早と考える。特に地方経済への影響や長期的な財政見通しについてより詳細な分析が必要。",
       role: "subject_expert" as const,
       role_title: "専門家",
       role_description: "慎重な判断を求める市民",
@@ -503,7 +503,7 @@ export function createDemoMessages(): Omit<
     {
       interview_session_id: DEMO_SESSION_ID,
       role: "user",
-      content: "国会や省庁デジタル化や、ムダの削減を達成して欲しい",
+      content: "市議会や省庁デジタル化や、ムダの削減を達成して欲しい",
     },
     {
       interview_session_id: DEMO_SESSION_ID,
@@ -539,7 +539,7 @@ export function createDemoReport(): InterviewReportInsert {
       "中国航路担当のフォワーダー実務者\n業界経験20年\n船荷証券（B/L）手続きに日常的に関与",
     opinions: [
       {
-        title: "国会や省庁デジタル化や、ムダの削減を達成して欲しい",
+        title: "市議会や省庁デジタル化や、ムダの削減を達成して欲しい",
         content:
           "省庁のレスポンスの速さや、官僚の長時間労働が削減され、よりよい人材が官僚になっていく事を期待している。",
       },
@@ -594,7 +594,7 @@ export function createAdditionalDemoMessages(): Omit<
     {
       interview_session_id: DEMO_SESSION_ID_WORK,
       role: "user",
-      content: "ガソリン価格の高騰で物流コストが上がっています。この法案には賛成です。",
+      content: "ガソリン価格の高騰で物流コストが上がっています。この議案には賛成です。",
     },
     {
       interview_session_id: DEMO_SESSION_ID_WORK,

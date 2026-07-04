@@ -18,19 +18,19 @@ function makeStance(
 }
 
 describe("getStanceStyles", () => {
-  it("isPreparing=true のとき法案提出前スタイルを返す", () => {
+  it("isPreparing=true のとき提出前スタイルを返す", () => {
     const result = getStanceStyles(undefined, true);
     expect(result).toEqual({
       bg: "bg-white",
       border: "border-mirai-text-muted",
       textColor: "text-mirai-text-muted",
-      label: "法案提出前",
+      label: "提出前",
     });
   });
 
-  it("isPreparing=true のときスタンスがあっても法案提出前スタイルを返す", () => {
+  it("isPreparing=true のときスタンスがあっても提出前スタイルを返す", () => {
     const result = getStanceStyles(makeStance("for"), true);
-    expect(result.label).toBe("法案提出前");
+    expect(result.label).toBe("提出前");
   });
 
   it("for スタンスで賛成スタイルを返す", () => {

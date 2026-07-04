@@ -72,8 +72,8 @@ export const BILL_STATUS_ORDER: Record<BillStatusEnum, number> = {
 
 // House display mapping
 export const HOUSE_LABELS: Record<HouseEnum, string> = {
-  HR: "衆議院",
-  HC: "参議院",
+  HR: "小諸市議会",
+  HC: "小諸市議会",
 };
 
 // ステータスを日本語ラベルに変換する関数

@@ -105,10 +105,10 @@ export function StanceForm({ billId, stance, billStatus }: StanceFormProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>チームみらいのスタンス</CardTitle>
+        <CardTitle>運営者のスタンス（※小諸版では未使用）</CardTitle>
         {isPreparing && (
           <p className="text-sm text-muted-foreground">
-            法案提出前のため、スタンス設定は無効化されています。
+            提出前のため、スタンス設定は無効化されています。
           </p>
         )}
       </CardHeader>

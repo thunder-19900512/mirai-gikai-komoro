@@ -100,7 +100,7 @@ export function ExpertRegistrationModal({
             </DialogTitle>
           </DialogHeader>
           <p className="text-sm font-medium text-gray-800">
-            政策検討のために、有識者としてチームみらいから連絡をする可能性があります。登録情報は公開されません。
+            調査・研究のために、有識者として運営者から連絡をする可能性があります。登録情報は公開されません。
           </p>
           <div className="mt-6">
             <Button onClick={handleClose} className="w-full">
@@ -122,7 +122,7 @@ export function ExpertRegistrationModal({
         </DialogHeader>
 
         <p className="text-sm text-gray-800 mt-2 font-medium">
-          政策検討のために、有識者としてチームみらいから連絡をする可能性があります。登録情報は公開されません。
+          調査・研究のために、有識者として運営者から連絡をする可能性があります。登録情報は公開されません。
         </p>
 
         <div className="flex flex-col gap-3 mt-2">

@@ -45,7 +45,7 @@ export default async function Home() {
       <Container className="">
         <div className="py-10">
           <main className="flex flex-col gap-16">
-            {/* 注目の法案セクション */}
+            {/* 注目の議案セクション */}
             <FeaturedBillSection bills={featuredBills} />
 
             {/* タグ別議案一覧セクション */}
@@ -74,7 +74,7 @@ export default async function Home() {
         {/* みらい議会とは セクション */}
         <About />
 
-        {/* チームみらいについて セクション */}
+        {/* 運営について セクション */}
         <TeamMirai />
 
         {/* 免責事項 */}

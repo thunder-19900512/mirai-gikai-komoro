@@ -214,7 +214,7 @@ export async function deleteInterviewConfigRecord(
  * インタビュー設定を論理削除する（deleted_atを設定）
  * 紐づく質問・セッション・レポートは保持され、一覧・公開取得から除外される。
  * 同時に status を closed にし、status="public" を見る公開判定
- * （法案一覧の「AIインタビュー受付中」バッジ等）からも除外されるようにする。
+ * （議案一覧の「AIインタビュー受付中」バッジ等）からも除外されるようにする。
  */
 export async function softDeleteInterviewConfigRecord(
   configId: string

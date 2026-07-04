@@ -30,10 +30,10 @@ export function Footer() {
 function FooterLogoSection() {
   return (
     <div className="flex flex-col items-center text-center mb-9">
-      <Link href={routes.home()} aria-label="みらい議会 トップページ">
+      <Link href={routes.home()} aria-label="みらい議会＠小諸市 トップページ">
         <Image
           src="/img/logo.svg"
-          alt="みらい議会"
+          alt="みらい議会＠小諸市"
           width={150}
           height={128}
           className="h-auto"
@@ -93,8 +93,17 @@ function FooterPolicies() {
 
 function FooterCopyright() {
   return (
-    <div className="text-center text-sm font-medium text-slate-800">
-      © 2025 Team Mirai All rights Reserved
+    <div className="flex flex-col items-center gap-3 text-center">
+      <p className="text-xs leading-relaxed text-slate-700">
+        本サイトは、チームみらいが公開しているオープンソース「みらい議会」を基に、山田雄司（小諸市在住）が個人として運営しています。
+        <br />
+        <strong>
+          これは政党チームみらいが運営しているものではありません。
+        </strong>
+      </p>
+      <div className="text-center text-sm font-medium text-slate-800">
+        © 2026 みらい議会＠小諸市（運営: 山田雄司）
+      </div>
     </div>
   );
 }

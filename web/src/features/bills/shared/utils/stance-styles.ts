@@ -20,7 +20,7 @@ export function getStanceStyles(
       bg: "bg-white",
       border: "border-mirai-text-muted",
       textColor: "text-mirai-text-muted",
-      label: "法案提出前",
+      label: "提出前",
     };
   }
 

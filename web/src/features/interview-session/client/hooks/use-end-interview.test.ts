@@ -23,7 +23,7 @@ describe("useEndInterview", () => {
     mockPush.mockReset();
   });
 
-  it("セッションをアーカイブしてから法案詳細へ遷移する", async () => {
+  it("セッションをアーカイブしてから議案詳細へ遷移する", async () => {
     mockArchive.mockResolvedValue({ success: true });
 
     const { result } = renderHook(() => useEndInterview("session-1", "bill-1"));
@@ -73,7 +73,7 @@ describe("useEndInterview", () => {
     expect(mockPush).toHaveBeenCalledTimes(1);
   });
 
-  it("アーカイブが失敗してもユーザーは法案詳細へ遷移させる", async () => {
+  it("アーカイブが失敗してもユーザーは議案詳細へ遷移させる", async () => {
     mockArchive.mockResolvedValue({ success: false, error: "boom" });
 
     const { result } = renderHook(() => useEndInterview("session-1", "bill-1"));

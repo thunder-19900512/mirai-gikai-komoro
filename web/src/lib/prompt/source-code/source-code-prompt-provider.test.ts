@@ -6,26 +6,26 @@ describe("SourceCodePromptProvider", () => {
 
   it("top-chat-system プロンプトを変数付きで返す", async () => {
     const result = await provider.getPrompt("top-chat-system", {
-      billSummary: '[{"id":"1","name":"テスト法案"}]',
+      billSummary: '[{"id":"1","name":"テスト議案"}]',
     });
 
     expect(result.content).toContain("みらい議会");
-    expect(result.content).toContain('[{"id":"1","name":"テスト法案"}]');
+    expect(result.content).toContain('[{"id":"1","name":"テスト議案"}]');
   });
 
   it("bill-chat-system-normal プロンプトを変数付きで返す", async () => {
     const result = await provider.getPrompt("bill-chat-system-normal", {
-      billName: "テスト法案",
-      billTitle: "テスト法案のタイトル",
-      billSummary: "テスト法案の要約",
-      billContent: "テスト法案の詳細内容",
+      billName: "テスト議案",
+      billTitle: "テスト議案のタイトル",
+      billSummary: "テスト議案の要約",
+      billContent: "テスト議案の詳細内容",
     });
 
     expect(result.content).toContain("みらい議会");
-    expect(result.content).toContain("テスト法案");
-    expect(result.content).toContain("テスト法案のタイトル");
-    expect(result.content).toContain("テスト法案の要約");
-    expect(result.content).toContain("テスト法案の詳細内容");
+    expect(result.content).toContain("テスト議案");
+    expect(result.content).toContain("テスト議案のタイトル");
+    expect(result.content).toContain("テスト議案の要約");
+    expect(result.content).toContain("テスト議案の詳細内容");
     expect(result.content).toContain("回答の難易度：ふつう");
   });
 
@@ -72,17 +72,17 @@ describe("SourceCodePromptProvider", () => {
 
   it("bill-chat-system-hard プロンプトを変数付きで返す", async () => {
     const result = await provider.getPrompt("bill-chat-system-hard", {
-      billName: "テスト法案",
-      billTitle: "テスト法案のタイトル",
-      billSummary: "テスト法案の要約",
-      billContent: "テスト法案の詳細内容",
+      billName: "テスト議案",
+      billTitle: "テスト議案のタイトル",
+      billSummary: "テスト議案の要約",
+      billContent: "テスト議案の詳細内容",
     });
 
     expect(result.content).toContain("みらい議会");
-    expect(result.content).toContain("テスト法案");
-    expect(result.content).toContain("テスト法案のタイトル");
-    expect(result.content).toContain("テスト法案の要約");
-    expect(result.content).toContain("テスト法案の詳細内容");
+    expect(result.content).toContain("テスト議案");
+    expect(result.content).toContain("テスト議案のタイトル");
+    expect(result.content).toContain("テスト議案の要約");
+    expect(result.content).toContain("テスト議案の詳細内容");
     expect(result.content).toContain("回答の難易度：難しい");
   });
 

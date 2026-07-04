@@ -37,7 +37,7 @@ export async function ReportCompletePage({
   const isExpertRole = isExpertRegistrationTargetRole(report.role);
   const authResult = await getAuthenticatedUser();
 
-  // 法案・メッセージ・有識者登録状況を並列取得
+  // 議案・メッセージ・有識者登録状況を並列取得
   const [bill, messages, isExpertRegistered] = await Promise.all([
     getBillById(billId),
     getInterviewMessages(report.interview_session_id),

@@ -80,7 +80,7 @@ async function classifyBatch(
         schema: classifyBatchSchema,
         prompt: `あなたは議案分析の専門家です。各意見を適切なトピックに分類してください。
 
-## 法案
+## 議案
 ${billTitle}
 
 ## トピック一覧

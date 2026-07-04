@@ -72,10 +72,10 @@ export function BillListWithStatusFilter({ bills }: Props) {
         ))}
       </div>
 
-      {/* 法案リスト */}
+      {/* 議案リスト */}
       {filteredBills.length === 0 ? (
         <p className="text-center py-12 text-muted-foreground">
-          該当する法案がありません
+          該当する議案がありません
         </p>
       ) : (
         <div className="flex flex-col gap-3">

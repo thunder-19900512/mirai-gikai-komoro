@@ -128,8 +128,8 @@ export async function updateInterviewConfig(
 /**
  * インタビュー設定を複製する（質問も含めてコピー）
  *
- * `options.targetBillId` を渡すと別の法案にコピーする。
- * 省略時は同じ法案内で複製する（従来動作）。
+ * `options.targetBillId` を渡すと別の議案にコピーする。
+ * 省略時は同じ議案内で複製する（従来動作）。
  * いずれの場合も新しい設定は status="closed" で作成する。
  */
 export async function duplicateInterviewConfig(
@@ -225,7 +225,7 @@ export async function deleteInterviewConfig(
 
     // web側のキャッシュを無効化
     // - INTERVIEW_CONFIGS: 公開設定の取得
-    // - BILLS: 法案一覧の「AIインタビュー受付中」バッジ・法案ページの公開レポート件数
+    // - BILLS: 議案一覧の「AIインタビュー受付中」バッジ・議案ページの公開レポート件数
     await invalidateWebCache([
       WEB_CACHE_TAGS.BILLS,
       WEB_CACHE_TAGS.INTERVIEW_CONFIGS,

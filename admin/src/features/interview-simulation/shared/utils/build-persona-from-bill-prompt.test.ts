@@ -16,7 +16,7 @@ const baseConfig = {
 };
 
 describe("buildPersonaFromBillPrompt", () => {
-  it("法案情報・テーマ・知識ソースがプロンプトに含まれる", () => {
+  it("議案情報・テーマ・知識ソースがプロンプトに含まれる", () => {
     const result = buildPersonaFromBillPrompt({
       bill: baseBill,
       interviewConfig: baseConfig,

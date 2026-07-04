@@ -26,7 +26,7 @@ describe("公開レポート loader 統合テスト", () => {
     context = null;
   });
 
-  it("公開済み件数が表示閾値未満なら法案詳細用レポートを返さない", async () => {
+  it("公開済み件数が表示閾値未満なら議案詳細用レポートを返さない", async () => {
     context = await createPublicReportLoaderContext();
     await createPublicReports(context, MIN_PUBLIC_REPORTS_FOR_DISPLAY - 1);
 
@@ -36,7 +36,7 @@ describe("公開レポート loader 統合テスト", () => {
     });
   });
 
-  it("公開済み件数が表示閾値以上なら法案詳細用に最大3件と総件数を返す", async () => {
+  it("公開済み件数が表示閾値以上なら議案詳細用に最大3件と総件数を返す", async () => {
     context = await createPublicReportLoaderContext();
     await createPublicReports(context, MIN_PUBLIC_REPORTS_FOR_DISPLAY);
 

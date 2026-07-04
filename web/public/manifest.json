@@ -1,11 +1,11 @@
 {
-  "name": "みらい議会",
-  "short_name": "みらい議会",
-  "description": "国会で今どんな法案が検討されているか、わかりやすく伝えるプラットフォーム",
+  "name": "みらい議会＠小諸市",
+  "short_name": "みらい議会＠小諸市",
+  "description": "小諸市議会で今どんな議案が審議されているか、わかりやすく伝えるプラットフォーム",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F7F4F0",
-  "theme_color": "#2aa693",
+  "theme_color": "#2b6cb0",
   "orientation": "portrait-primary",
   "icons": [
     {

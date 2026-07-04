@@ -22,7 +22,7 @@ export function InterviewSuggestionBanner({
         <div className="flex flex-col gap-2">
           <div className="flex">
             <span className="inline-flex items-center px-3 py-1 bg-mirai-surface-muted rounded-2xl text-xs font-medium text-black leading-none">
-              法案の当事者の方へ
+              議案の当事者の方へ
             </span>
           </div>
           <p className="text-base font-bold leading-[1.5] text-mirai-text">

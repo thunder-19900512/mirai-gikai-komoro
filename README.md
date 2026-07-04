@@ -1,4 +1,29 @@
-# みらい議会
+# みらい議会＠小諸市
+
+> **これは、政党チームみらいが公開しているオープンソース「みらい議会」の非公式フォークです。**
+> 対象を国会から**小諸市議会**に置き換え、小諸市在住の山田雄司が個人として運営しています。
+> 政党チームみらいが運営しているものではありません。
+>
+> - 本家（国会版）: https://gikai.team-mir.ai/
+> - 本家リポジトリ: https://github.com/team-mirai/mirai-gikai
+> - ライセンス: [AGPL-3.0](./LICENSE)（フォーク条件は [FORK_GUIDELINES.md](./FORK_GUIDELINES.md) 参照）
+
+## 本家からの主な変更点（AGPL-3.0 §5(a) に基づく変更明示）
+
+2026-07-05 山田雄司によりフォーク。以下を変更:
+
+- **対象を国会 → 小諸市議会に変更**（会期＝定例会/臨時会、議案＝条例・予算・請願陳情等）。二院制前提のUI（衆議院/参議院）を単院（小諸市議会）に読み替え
+- サービス名を「みらい議会＠小諸市」に変更
+- ロゴ・OGP・ヒーロー画像・PWAアイコン・favicon を独自のものに差し替え
+- primary カラーを `#2aa693`（緑）→ `#2b6cb0`（青）に変更
+- フッター等に免責文言を追加、運営者情報・本家リンクを掲載
+- 政党（チームみらい）固有の記述・寄附導線・党スタンス表示を、中立な運営者情報に置き換え（**公選法配慮のため、議案の事実整理・解説に徹し、投票呼びかけや候補者支持を行わない**）
+- AIチャット/インタビューのシステムプロンプトを小諸市議会向けに調整
+- ローカル開発時のテーブル権限不足を補う migration を追加（`20260705000000_restore_default_table_grants.sql`）
+
+詳細な運用・自動化設計は [`docs/KOMORO_OPERATIONS.md`](./docs/KOMORO_OPERATIONS.md) を参照。
+
+---
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/team-mirai-volunteer/mirai-gikai)
 [![codecov](https://codecov.io/gh/team-mirai/mirai-gikai/branch/develop/graph/badge.svg)](https://codecov.io/gh/team-mirai/mirai-gikai)

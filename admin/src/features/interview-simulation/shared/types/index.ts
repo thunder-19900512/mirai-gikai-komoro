@@ -19,7 +19,7 @@ export interface CompletedReportListItem {
   reportId: string;
   /** このレポートが属する config ID。UI で「現在の config のみ」フィルタに使う */
   configId: string;
-  /** config 名。法案全体から選ぶとき、どの config のインタビューか判別する */
+  /** config 名。議案全体から選ぶとき、どの config のインタビューか判別する */
   configName: string | null;
   roleTitle: string | null;
   role: string | null;
@@ -148,7 +148,7 @@ export type PersonaSlotInput =
  * 複数ペルソナシミュ API (/api/interview-simulation/run-multi) のリクエストボディ
  */
 export interface MultiSimulationRunRequest {
-  /** 対象法案 ID（全スロット共通） */
+  /** 対象議案 ID（全スロット共通） */
   billId: string;
   /** 各スロットのペルソナ定義（1〜MAX_PERSONA_SLOTS） */
   personaSlots: PersonaSlotInput[];

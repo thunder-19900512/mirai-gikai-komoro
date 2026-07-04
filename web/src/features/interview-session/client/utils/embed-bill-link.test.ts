@@ -5,7 +5,7 @@ describe("embedBillLink", () => {
   const billTitle = "子ども医療費助成条例";
   const link = "/bills/123";
 
-  it("「」括弧付きの法案名をリンクに変換する", () => {
+  it("「」括弧付きの議案名をリンクに変換する", () => {
     const text =
       "こんにちは！今日は「子ども医療費助成条例」についてお聞きします。";
     const result = embedBillLink(text, billTitle, link);
@@ -14,7 +14,7 @@ describe("embedBillLink", () => {
     );
   });
 
-  it("括弧なしの法案名をリンクに変換する", () => {
+  it("括弧なしの議案名をリンクに変換する", () => {
     const text = "こんにちは！子ども医療費助成条例についてお聞きします。";
     const result = embedBillLink(text, billTitle, link);
     expect(result).toBe(
@@ -31,7 +31,7 @@ describe("embedBillLink", () => {
     );
   });
 
-  it("法案名が含まれない場合はテキストをそのまま返す", () => {
+  it("議案名が含まれない場合はテキストをそのまま返す", () => {
     const text = "こんにちは！今日のインタビューを始めましょう。";
     const result = embedBillLink(text, billTitle, link);
     expect(result).toBe(text);

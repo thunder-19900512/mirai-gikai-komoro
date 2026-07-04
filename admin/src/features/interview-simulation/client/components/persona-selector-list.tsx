@@ -24,7 +24,7 @@ interface PersonaSelectorListProps {
   billId: string;
   /** この config の ID */
   currentConfigId: string;
-  /** 法案配下の全完了レポート（config_id 付き） */
+  /** 議案配下の全完了レポート（config_id 付き） */
   completedReports: CompletedReportListItem[];
   completedReportsTruncated?: boolean;
   completedReportsLimit?: number;
@@ -189,7 +189,7 @@ export function PersonaSelectorList({
               className={`text-xs px-2 py-0.5 rounded ${reportScope === "bill" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
               onClick={() => setReportScope("bill")}
             >
-              この法案全体
+              この議案全体
             </button>
           </div>
           <div className="max-h-72 overflow-y-auto space-y-1 text-sm">

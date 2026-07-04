@@ -7,9 +7,9 @@ function baseParams(
 ): InterviewPromptInput {
   return {
     bill: {
-      name: "テスト法案",
+      name: "テスト議案",
       bill_content: {
-        title: "テスト法案タイトル",
+        title: "テスト議案タイトル",
         summary: "要約",
         content: "本文",
       },
@@ -32,12 +32,12 @@ describe("buildTargetedModeSystemPrompt", () => {
           {
             id: "q1",
             question: "専門家としてどう評価しますか？",
-            target_audience: "当該法案分野の専門家",
+            target_audience: "当該議案分野の専門家",
           },
         ],
       })
     );
-    expect(prompt).toContain("対象者: 当該法案分野の専門家");
+    expect(prompt).toContain("対象者: 当該議案分野の専門家");
     expect(prompt).toContain("専門家としてどう評価しますか？");
   });
 

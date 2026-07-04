@@ -42,7 +42,7 @@ async function buildPipelineParams(params: MultiSimulationRunRequest) {
   if (!billData.bill) {
     return {
       ok: false as const,
-      error: "対象の法案が見つかりません",
+      error: "対象の議案が見つかりません",
       status: 404,
     };
   }
@@ -66,7 +66,7 @@ async function buildPipelineParams(params: MultiSimulationRunRequest) {
       target_audience: q.target_audience ?? null,
     }));
 
-  const billTitle = billData.billTitle || billData.bill.name || "この法案";
+  const billTitle = billData.billTitle || billData.bill.name || "この議案";
 
   return {
     ok: true as const,

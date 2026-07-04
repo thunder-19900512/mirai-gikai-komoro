@@ -65,7 +65,7 @@ export async function BillDetailLayout({
       </BillDetailClient>
 
       <Container>
-        {/* 法案のトピック一覧（AIインタビュー意見の整理） */}
+        {/* 議案のトピック一覧（AIインタビュー意見の整理） */}
         <div className="my-8">
           <BillTopicsPreviewSection
             billId={bill.id}

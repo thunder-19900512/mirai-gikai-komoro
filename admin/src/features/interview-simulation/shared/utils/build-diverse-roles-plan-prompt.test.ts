@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { buildDiverseRolesPlanPrompt } from "./build-diverse-roles-plan-prompt";
 
 const baseBill = {
-  name: "宇宙ビジネス促進法案",
+  name: "宇宙ビジネス促進議案",
   knowledge_source: "業界団体ヒアリング",
   bill_content: {
     title: "民間宇宙射場の整備促進",
@@ -16,13 +16,13 @@ const baseConfig = {
 };
 
 describe("buildDiverseRolesPlanPrompt", () => {
-  it("法案情報・テーマ・スロット件数を含む", () => {
+  it("議案情報・テーマ・スロット件数を含む", () => {
     const out = buildDiverseRolesPlanPrompt({
       bill: baseBill,
       interviewConfig: baseConfig,
       slotsToPlan: [{}, {}, {}],
     });
-    expect(out).toContain("宇宙ビジネス促進法案");
+    expect(out).toContain("宇宙ビジネス促進議案");
     expect(out).toContain("民間宇宙射場の整備促進");
     expect(out).toContain("民間事業者の射場運用を支援する");
     expect(out).toContain("射場の安全性");

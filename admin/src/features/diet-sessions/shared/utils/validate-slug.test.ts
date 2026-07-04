@@ -43,7 +43,7 @@ describe("validateSlug", () => {
   });
 
   it("日本語を含む場合、エラーメッセージを返す", () => {
-    expect(validateSlug("国会")).toBe(
+    expect(validateSlug("市議会")).toBe(
       "スラッグは半角英小文字、数字、ハイフンのみ使用できます"
     );
   });

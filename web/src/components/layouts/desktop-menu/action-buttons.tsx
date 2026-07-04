@@ -10,25 +10,25 @@ export function DesktopMenuActionButtons() {
       <LinkButton
         href={EXTERNAL_LINKS.ABOUT_NOTE}
         icon={{
-          src: "/icons/note-icon.png",
-          alt: "note",
+          src: "/icons/info-icon.svg",
+          alt: "",
           width: 20,
           height: 20,
         }}
       >
-        みらい議会とは
+        このサイトについて
       </LinkButton>
 
       <LinkButton
-        href={EXTERNAL_LINKS.DONATION}
+        href={EXTERNAL_LINKS.HONKE_GIKAI}
         icon={{
-          src: "/icons/heart-icon.svg",
-          alt: "寄附",
+          src: "/icons/info-icon.svg",
+          alt: "本家みらい議会",
           width: 20,
           height: 20,
         }}
       >
-        寄附で応援する
+        本家「みらい議会」
       </LinkButton>
     </div>
   );

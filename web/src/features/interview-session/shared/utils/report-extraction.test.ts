@@ -45,14 +45,14 @@ describe("extractReportFromMessage", () => {
             title: "意見1",
             content: "内容1",
             source_message_id: null,
-            contextual_quote: "（法案について）賛成だ",
+            contextual_quote: "（議案について）賛成だ",
             bill_sentiment: "期待",
           },
         ],
       },
     };
     const result = extractReportFromMessage(JSON.stringify(withNewFields));
-    expect(result?.opinions[0].contextual_quote).toBe("（法案について）賛成だ");
+    expect(result?.opinions[0].contextual_quote).toBe("（議案について）賛成だ");
     expect(result?.opinions[0].bill_sentiment).toBe("期待");
   });
 

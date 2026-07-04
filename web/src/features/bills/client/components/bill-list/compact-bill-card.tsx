@@ -11,7 +11,7 @@ interface CompactBillCardProps {
 }
 
 /**
- * コンパクトな水平レイアウトの法案カード
+ * コンパクトな水平レイアウトの議案カード
  * 過去国会セクションや過去国会議案一覧ページで使用
  */
 export function CompactBillCard({ bill, className }: CompactBillCardProps) {

@@ -43,7 +43,7 @@ export function BillTopicsPreviewSection({
         className="flex items-center gap-4"
       >
         <h2 className="flex items-center gap-4 font-bold leading-9 text-mirai-text">
-          <span className="text-[22px]">💬法案のトピック一覧</span>
+          <span className="text-[22px]">💬議案のトピック一覧</span>
           <span className="text-[20px]">{topics.length}件</span>
         </h2>
         <ChevronRight className="size-6 shrink-0 text-primary" />

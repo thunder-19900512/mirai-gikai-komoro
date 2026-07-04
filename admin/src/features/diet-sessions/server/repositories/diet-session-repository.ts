@@ -10,7 +10,7 @@ export async function findAllDietSessions() {
     .order("start_date", { ascending: false });
 
   if (error) {
-    throw new Error(`国会会期の取得に失敗しました: ${error.message}`);
+    throw new Error(`市議会会期の取得に失敗しました: ${error.message}`);
   }
 
   return data;
@@ -37,7 +37,7 @@ export async function createDietSessionRecord(input: {
     .single();
 
   if (error) {
-    throw new Error(`国会会期の作成に失敗しました: ${error.message}`);
+    throw new Error(`市議会会期の作成に失敗しました: ${error.message}`);
   }
 
   return data;
@@ -68,7 +68,7 @@ export async function updateDietSessionRecord(
     .single();
 
   if (error) {
-    throw new Error(`国会会期の更新に失敗しました: ${error.message}`);
+    throw new Error(`市議会会期の更新に失敗しました: ${error.message}`);
   }
 
   return data;
@@ -79,7 +79,7 @@ export async function deleteDietSessionRecord(id: string) {
   const { error } = await supabase.from("diet_sessions").delete().eq("id", id);
 
   if (error) {
-    throw new Error(`国会会期の削除に失敗しました: ${error.message}`);
+    throw new Error(`市議会会期の削除に失敗しました: ${error.message}`);
   }
 }
 

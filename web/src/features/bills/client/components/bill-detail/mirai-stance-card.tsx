@@ -8,16 +8,16 @@ interface MiraiStanceCardProps {
 }
 
 export function MiraiStanceCard({ stance, billStatus }: MiraiStanceCardProps) {
-  // 法案提出前の場合は専用のスタイルを使用
+  // 提出前の場合は専用のスタイルを使用
   const isPreparing = billStatus === "preparing";
 
-  if (!stance && !isPreparing) {
-    return null; // スタンスがなく、法案提出前でもない場合は何も表示しない
+  if (!stance) {
+    return null; // 小諸市版ではスタンス機能を使用しないため、登録がなければ常に非表示
   }
 
   const styles = getStanceStyles(stance, isPreparing);
   const comment = isPreparing
-    ? "法案提出後、党内で検討のうえ賛否を表明します。"
+    ? "議案提出後、党内で検討のうえ賛否を表明します。"
     : stance?.comment;
 
   return (
