@@ -20,8 +20,14 @@ type Difficulty = { title: string; summary: string; content: string };
 type BillInput = {
   bill_number: string;
   name: string;
-  committee: string;
-  result: string;
+  committee?: string;
+  result?: string;
+  /** 種別。"一般質問" のときは議決結果を持たない扱いにする（既定は議案） */
+  kind?: string;
+  /** slug の末尾。省略時は bill_number から生成 */
+  slug_suffix?: string;
+  /** テーマタグ（例: ["学校再編・教育","子育て・保育"]）。争点/テーマページ用 */
+  tags?: string[];
   status: "preparing" | "introduced" | "in_originating_house" | "in_receiving_house" | "enacted" | "rejected";
   is_featured?: boolean;
   normal: Difficulty;
@@ -74,8 +80,11 @@ async function main() {
 
   let created = 0;
   for (const b of data.bills) {
-    const slug = `${data.session.slug}-${billNumberSlug(b.bill_number)}`;
-    const statusNote = `${b.bill_number}／付託: ${b.committee}／審議結果: ${b.result}（${data.session.name}）`;
+    const slug = `${data.session.slug}-${b.slug_suffix ?? billNumberSlug(b.bill_number)}`;
+    const statusNote =
+      b.kind === "一般質問"
+        ? `一般質問（${data.session.name}）｜${b.bill_number}｜答弁の要旨は会議録公開後に追記`
+        : `${b.bill_number}／付託: ${b.committee ?? "—"}／審議結果: ${b.result ?? "—"}（${data.session.name}）`;
 
     // 2) 議案 upsert（draft 固定）
     const { data: bill, error: bErr } = await supabase
@@ -119,8 +128,24 @@ async function main() {
         );
       if (cErr) throw new Error(`bill_contents upsert failed (${b.bill_number}/${level}): ${cErr.message}`);
     }
+
+    // 4) テーマタグ upsert ＋ bills_tags 紐付け（争点/テーマページ用）
+    for (const label of b.tags ?? []) {
+      const { data: tag, error: tErr } = await supabase
+        .from("tags")
+        .upsert({ label }, { onConflict: "label" })
+        .select()
+        .single();
+      if (tErr) throw new Error(`tags upsert failed (${label}): ${tErr.message}`);
+      const { error: btErr } = await supabase
+        .from("bills_tags")
+        .upsert({ bill_id: bill.id, tag_id: tag.id }, { onConflict: "bill_id,tag_id" });
+      if (btErr) throw new Error(`bills_tags upsert failed (${label}): ${btErr.message}`);
+    }
+
     created++;
-    console.log(`  ✅ ${b.bill_number} ${b.name}  [${b.result}] draft`);
+    const badge = b.kind === "一般質問" ? "一般質問" : (b.result ?? "—");
+    console.log(`  ✅ ${b.name}  [${badge}] draft`);
   }
 
   console.log(`\n🎉 ${created}件の議案を draft で投入しました（公開はadminで人間が実施）。`);
