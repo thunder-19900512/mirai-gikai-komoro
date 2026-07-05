@@ -38,7 +38,7 @@ export default async function Home() {
     <>
       <Hero />
 
-      {/* 本日の国会セクション */}
+      {/* 本日の市議会セクション */}
       <CurrentDietSession session={currentSession} />
 
       {/* 議案一覧セクション */}
@@ -57,7 +57,7 @@ export default async function Home() {
         </div>
       </Container>
 
-      {/* 前回の国会セクション（Archive） */}
+      {/* 前回の市議会セクション（Archive） */}
       {previousSessionData && (
         <div className="bg-mirai-surface-muted py-10">
           <Container>

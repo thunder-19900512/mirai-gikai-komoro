@@ -12,8 +12,8 @@ import {
 
 /**
  * Featured表示用の議案をタグごとにグループ化して取得
- * featured_priorityが設定されているタグを持つアクティブな国会会期の議案を優先度順に取得
- * アクティブな国会会期がない場合は全件取得
+ * featured_priorityが設定されているタグを持つアクティブな議会会期の議案を優先度順に取得
+ * アクティブな議会会期がない場合は全件取得
  */
 export async function getBillsByFeaturedTags(): Promise<BillsByTag[]> {
   // キャッシュ外でcookiesにアクセス

@@ -96,7 +96,28 @@ launchctl load ~/Library/LaunchAgents/com.yamada.mirai-gikai-komoro.plist
 - **公開ボタンを押す前に、必ず議案書本文・会議録の原典と照合する**（この一手だけは自動化しない）。
 - 本家運用ガイドライン: https://note.com/team_mirai_jp/n/nc59ec347e8c7
 
-## 7. コンテンツの2段階（重要）
+## 7. 本家（team-mirai）への追従 — 元祖から離れすぎないための運用
+
+**方針: コードは本家のまま、価値はデータで足す。** 一般質問・請願・テーマ（争点）・両論併記・市民の声の集約は、**新しいコードを書かず**、本家が既に持つ機能（`bills`＝審議対象の器／`tags`＝テーマ／`bill_contents`＝両論併記の解説／AIインタビュー＋トピック分析＝目安箱／`is_featured`＝注目枠）に**データとして盛る**。凝った独自UIは作らない（＝乖離の源だから）。自動化は `komoro/` フォルダに隔離してあるので本家と衝突しない。
+
+### 本家由来の乖離は2種類だけ
+1. **ブランディング**（サービス名・色・ロゴ・免責・プロンプト本文の書き換え）＝ 少数ファイルの個別編集。`git merge` がそのまま保持。本家が同じ行を変えた時だけ手で解決。
+2. **「国会→市議会」系の機械的な文言置換**＝ 広範囲だが機械的。`komoro/scripts/localize.py` で**冪等に再適用できる**ようにしてある。
+
+### 追従ワークフロー（本家の更新を取り込む時）
+```bash
+cd ~/mirai-gikai-komoro
+git fetch upstream                       # 本家(team-mirai)の最新を取得
+git checkout komoro-fork
+git merge upstream/main                  # 衝突が出たら手で解決（主にブランディング箇所）
+python3 komoro/scripts/localize.py       # 新しく入った「法案/国会/衆参」を市議会表記へ機械変換（冪等）
+python3 komoro/scripts/localize.py --check  # 取りこぼしゼロを確認（本家追従クリーン）
+pnpm install && pnpm typecheck && pnpm -r test   # 壊れていないか確認
+```
+- `localize.py` は本家＝国会版への意図的な言及（「（国会版）」等）は保護して置換しない。
+- リモート構成: `upstream` = team-mirai/mirai-gikai（追従元）。Phase4で山田の公開リポジトリを作ったら `origin` に登録して push する。
+
+## 8. コンテンツの2段階（重要）
 
 提出議案一覧PDFは「議案名・番号・付託委員会・議決結果」までしか分からない。改正の中身や審議の論点は**会議録が公開されてから**（数週間〜数か月後）でないと書けない。したがって:
 

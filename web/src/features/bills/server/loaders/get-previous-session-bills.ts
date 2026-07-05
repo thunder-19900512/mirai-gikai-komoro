@@ -21,7 +21,7 @@ export type PreviousSessionBillsResult = {
 } | null;
 
 /**
- * 前回の国会会期とその議案を取得（プレビュー用、最大5件）
+ * 前回の議会会期とその議案を取得（プレビュー用、最大5件）
  * 前回の会期がない場合はnullを返す
  */
 export async function getPreviousSessionBills(): Promise<PreviousSessionBillsResult> {

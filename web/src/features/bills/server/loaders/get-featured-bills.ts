@@ -12,8 +12,8 @@ import {
 
 /**
  * 注目の議案を取得する
- * is_featured = true でアクティブな国会会期の公開済み議案を最新順に取得
- * アクティブな国会会期がない場合は全件取得
+ * is_featured = true でアクティブな議会会期の公開済み議案を最新順に取得
+ * アクティブな議会会期がない場合は全件取得
  */
 export async function getFeaturedBills(): Promise<BillWithContent[]> {
   // キャッシュ外でcookiesにアクセス

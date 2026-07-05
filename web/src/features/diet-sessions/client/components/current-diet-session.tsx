@@ -15,7 +15,7 @@ export function CurrentDietSession({ session }: CurrentDietSessionProps) {
   //         </h2>
   //         <div className="inline-flex items-center justify-center px-5 py-1.5 rounded-[50px] bg-gray-200 shrink-0">
   //           <span className="text-base font-bold leading-[1.48] text-gray-600">
-  //             国会閉会中
+  //             市議会閉会中
   //           </span>
   //         </div>
   //       </div>

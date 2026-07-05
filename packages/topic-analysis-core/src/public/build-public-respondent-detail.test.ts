@@ -21,7 +21,7 @@ describe("buildPublicRespondentDetail", () => {
       {
         id: "m1",
         role: "assistant",
-        content: "この法案についてどう思いますか？",
+        content: "この議案についてどう思いますか？",
         created_at: "2026-06-01T00:00:01Z",
       },
       {
@@ -43,7 +43,7 @@ describe("buildPublicRespondentDetail", () => {
       {
         id: "m1",
         speaker: "assistant",
-        content: "この法案についてどう思いますか？",
+        content: "この議案についてどう思いますか？",
         created_at: "2026-06-01T00:00:01Z",
       },
       {

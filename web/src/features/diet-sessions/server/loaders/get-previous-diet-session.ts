@@ -5,7 +5,7 @@ import { findPreviousDietSession } from "../repositories/diet-session-repository
 import { getActiveDietSession } from "./get-active-diet-session";
 
 /**
- * 前回の国会会期を取得
+ * 前回の議会会期を取得
  * アクティブなセッションより古いセッションを返す
  * アクティブなセッションがない場合、または古いセッションがない場合はnullを返す
  */

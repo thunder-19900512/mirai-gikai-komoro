@@ -4,7 +4,7 @@ import type { DietSession } from "../../shared/types";
 import { findCurrentDietSession } from "../repositories/diet-session-repository";
 
 /**
- * 指定日時点で開催中の国会会期を取得
+ * 指定日時点で開催中の議会会期を取得
  * 指定日が開始日と終了日の範囲内にある会期を返す
  */
 export async function getCurrentDietSession(

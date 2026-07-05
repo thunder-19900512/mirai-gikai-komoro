@@ -3,7 +3,7 @@ import { createAdminClient } from "@mirai-gikai/supabase";
 import type { DietSession } from "../../shared/types";
 
 /**
- * アクティブな国会会期を取得
+ * アクティブな議会会期を取得
  */
 export async function findActiveDietSession(): Promise<DietSession | null> {
   const supabase = createAdminClient();
@@ -23,7 +23,7 @@ export async function findActiveDietSession(): Promise<DietSession | null> {
 }
 
 /**
- * 指定日時点で開催中の国会会期を取得
+ * 指定日時点で開催中の議会会期を取得
  */
 export async function findCurrentDietSession(
   targetDate: string
@@ -48,7 +48,7 @@ export async function findCurrentDietSession(
 }
 
 /**
- * slugで国会会期を取得
+ * slugで議会会期を取得
  */
 export async function findDietSessionBySlug(
   slug: string
@@ -70,7 +70,7 @@ export async function findDietSessionBySlug(
 }
 
 /**
- * 指定日より前の直近の国会会期を取得
+ * 指定日より前の直近の議会会期を取得
  */
 export async function findPreviousDietSession(
   beforeStartDate: string

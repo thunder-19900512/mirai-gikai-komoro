@@ -296,7 +296,7 @@ describe("bill-repository 統合テスト", () => {
   // ============================================================
 
   describe("findPublishedBillsByDietSession", () => {
-    it("国会会期IDに紐づく公開済み議案を取得できる", async () => {
+    it("議会会期IDに紐づく公開済み議案を取得できる", async () => {
       const session = await createTestDietSession();
       dietSessionIds.push(session.id);
 
@@ -349,7 +349,7 @@ describe("bill-repository 統合テスト", () => {
   // ============================================================
 
   describe("findPreviousSessionBills", () => {
-    it("前回の国会会期の公開済み議案を件数制限ありで取得できる", async () => {
+    it("前回の議会会期の公開済み議案を件数制限ありで取得できる", async () => {
       const session = await createTestDietSession();
       dietSessionIds.push(session.id);
 

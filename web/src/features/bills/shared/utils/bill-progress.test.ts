@@ -9,8 +9,8 @@ import {
 
 const BASE_STEPS = [
   { label: "議案\n提出" },
-  { label: "衆議院\n審議" },
-  { label: "参議院\n審議" },
+  { label: "小諸市議会\n審議" },
+  { label: "小諸市議会\n審議" },
   { label: "議案\n成立" },
 ] as const;
 
@@ -24,8 +24,8 @@ describe("getStatusMessage", () => {
   });
 
   test("preparing 以外で statusNote がある場合はそれを返す", () => {
-    expect(getStatusMessage("introduced", "衆議院で審議中")).toBe(
-      "衆議院で審議中"
+    expect(getStatusMessage("introduced", "小諸市議会で審議中")).toBe(
+      "小諸市議会で審議中"
     );
   });
 
@@ -58,19 +58,19 @@ describe("getStepState", () => {
 });
 
 describe("getOrderedSteps", () => {
-  test("HR(衆議院)の場合はステップ順序がそのまま", () => {
+  test("HR(小諸市議会)の場合はステップ順序がそのまま", () => {
     const result = getOrderedSteps("HR", BASE_STEPS);
     expect(result[0].label).toBe("議案\n提出");
-    expect(result[1].label).toBe("衆議院\n審議");
-    expect(result[2].label).toBe("参議院\n審議");
+    expect(result[1].label).toBe("小諸市議会\n審議");
+    expect(result[2].label).toBe("小諸市議会\n審議");
     expect(result[3].label).toBe("議案\n成立");
   });
 
-  test("HC(参議院)の場合はステップ2と3が入れ替わる", () => {
+  test("HC(小諸市議会)の場合はステップ2と3が入れ替わる", () => {
     const result = getOrderedSteps("HC", BASE_STEPS);
     expect(result[0].label).toBe("議案\n提出");
-    expect(result[1].label).toBe("参議院\n審議");
-    expect(result[2].label).toBe("衆議院\n審議");
+    expect(result[1].label).toBe("小諸市議会\n審議");
+    expect(result[2].label).toBe("小諸市議会\n審議");
     expect(result[3].label).toBe("議案\n成立");
   });
 

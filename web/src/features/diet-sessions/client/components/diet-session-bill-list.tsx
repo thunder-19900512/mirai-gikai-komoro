@@ -52,7 +52,7 @@ export function DietSessionBillList({ session, bills }: Props) {
         <BillListWithStatusFilter bills={bills} />
       )}
 
-      {/* 衆議院リンク */}
+      {/* 小諸市議会リンク */}
       {session.shugiin_url && (
         <div className="flex items-center gap-1 text-[13px] font-medium text-mirai-text">
           {startDate.getFullYear()}年{session.name}に提出された全ての議案は
