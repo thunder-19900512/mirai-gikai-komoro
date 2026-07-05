@@ -14,6 +14,9 @@ export const EXTERNAL_LINKS = {
   /** 小諸市議会 公式サイト */
   KOMORO_GIKAI:
     "https://www.city.komoro.lg.jp/official/shisei_machizukuri/komoroshigikai/index.html",
+  /** 小諸市議会 提出議案等一覧（公式・議案の一次情報） */
+  KOMORO_GIAN_LIST:
+    "https://www.city.komoro.lg.jp/official/shisei_machizukuri/komoroshigikai/shigikaiteishutsugiannadoichiran/index.html",
   /** よくあるご質問（リポジトリのREADME） */
   FAQ: "https://github.com/thunder-19900512/mirai-gikai-komoro#readme",
 } as const;

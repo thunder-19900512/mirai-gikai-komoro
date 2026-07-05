@@ -1,6 +1,7 @@
 import type { Route } from "next";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { EXTERNAL_LINKS } from "@/config/external-links";
 import type { ComingSoonBill } from "@/features/bills/shared/types";
 import { Card, CardContent } from "../ui/card";
 
@@ -39,7 +40,7 @@ export function ComingSoonSection({ bills }: ComingSoonSectionProps) {
       {/* 市議会の議案情報へのリンク */}
       <div className="text-right text-sm text-mirai-text-secondary">
         <Link
-          href="https://www.shugiin.go.jp/internet/itdb_gian.nsf/html/gian/menu.htm"
+          href={EXTERNAL_LINKS.KOMORO_GIAN_LIST}
           target="_blank"
           rel="noopener noreferrer"
           className="hover:opacity-80 inline-flex items-center gap-1"
