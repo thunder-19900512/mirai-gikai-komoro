@@ -6,6 +6,7 @@ import {
   getStatusMessage,
   getStepState,
 } from "../../../shared/utils/bill-progress";
+import { isGeneralQuestion } from "../../../shared/utils/bill-status";
 
 interface BillStatusProgressProps {
   status: BillStatusEnum;
@@ -98,6 +99,24 @@ export function BillStatusProgress({
   originatingHouse,
   statusNote,
 }: BillStatusProgressProps) {
+  // 一般質問は議決フロー（提出→委員会→本会議→議決）を持たないため、
+  // 議決前提の進捗バーは出さず、位置づけの説明だけを表示する。
+  if (isGeneralQuestion(statusNote)) {
+    return (
+      <>
+        <h2 className="text-[22px] font-bold mb-4">👉 これは一般質問です</h2>
+        <div className="bg-white rounded-lg border p-6">
+          <p className="text-sm leading-relaxed text-mirai-text-note">
+            一般質問は、議員が市長・行政に市政全般について問う場です。議案のような賛成・反対の採決（議決）は行われません。
+            {statusNote ? `（${statusNote}）` : ""}
+            <br />
+            市側の答弁の要旨は、会議録が公開され次第このページに追記していきます。
+          </p>
+        </div>
+      </>
+    );
+  }
+
   const isPreparing = status === "preparing";
   const currentStep = getCurrentStep(status);
 
