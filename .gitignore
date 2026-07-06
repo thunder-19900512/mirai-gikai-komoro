@@ -21,3 +21,4 @@ komoro/pipeline/.env
 komoro/pipeline/downloads/
 komoro/pipeline/logs/
 komoro/pipeline/state/
+komoro/pipeline/minutes/
