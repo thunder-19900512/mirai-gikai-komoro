@@ -76,6 +76,21 @@ set -a && . ./.env && set +a
 4. **公開前レビュー期間**: `web` の `BASIC_AUTH_USER/PASSWORD` を設定して Basic認証を掛け、限定公開で内容を詰める
 5. `komoro/pipeline/.env` に**本番の** `SUPABASE_URL` / `SUPABASE_SECRET_KEY` / `ADMIN_URL` を書く（自動更新の投入先を本番にする）
 
+### 4.1 進捗（2026-09-06 Claude実施分と残り）
+
+**済み**
+- Supabase Cloud: project `uefyokvrlhmprltozgnh`（ap-northeast-1, Free）作成済。URL `https://uefyokvrlhmprltozgnh.supabase.co`
+- GitHub: `thunder-19900512/mirai-gikai-komoro`（**まずprivate**。AGPLの公開義務はサイト公開時までに public 化＝人間判断）に `komoro-fork` を push 済。`origin` 登録済
+- Vercel: `mirai-gikai-komoro-web`（root `web`）／`mirai-gikai-komoro-admin`（root `admin`）作成・GitHub連携済。Production の環境変数は投入済（Supabase URL/publishable, AI_GATEWAY_API_KEY, REVALIDATE_SECRET, ADMIN_URL, NEXT_PUBLIC_*_URL, コスト上限, webのBASIC_AUTH_USER=komoro＋パスワード, adminのADMIN_MCP_TOKEN）。生成した値の控えは repo ルートの `.env` 末尾 `PROD_*`（gitignore済）
+
+**残り（山田の手＝自動モードでブロックされた「本番への書き込み」系）**
+1. DBスキーマ投入: `npx supabase login && npx supabase link --project-ref uefyokvrlhmprltozgnh && npx supabase db push`
+2. `SUPABASE_SECRET_KEY`（service_role）を Supabase ダッシュボード > Settings > API Keys から取り、web/admin 両方の Vercel 環境変数に追加（ダッシュボードでしか見えない）
+3. 初回デプロイ: `cd web && npx vercel deploy --prod` ／ `cd admin && npx vercel deploy --prod`（以後は push で自動。git push で発火しない場合は GitHub > Settings > Applications > Vercel でこのリポジトリへのアクセスを許可）
+4. admin ログイン用 Google OAuth を Supabase Authentication > Providers で有効化（`ADMIN_AUTH_CALLBACK_URL` = `https://mirai-gikai-komoro-admin.vercel.app/api/auth/callback`）
+5. `komoro/pipeline/.env` に本番の `SUPABASE_URL` / `SUPABASE_SECRET_KEY` / `ADMIN_URL` → §5 の launchd を有効化
+6. 内容を詰めたら Basic 認証を外し、GitHub リポジトリを public に（AGPL）
+
 ## 5. 自動更新の有効化（デプロイ後）
 
 ```bash
