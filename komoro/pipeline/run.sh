@@ -58,8 +58,8 @@ SUMMARY_ITEMS=""  # notify 用 JSON 断片を貯める
 for CODE in "${CODES[@]}"; do
   echo "── 会期 $CODE の下書き生成 ──" >&2
   BEFORE="$(ls "$REPO/komoro/data"/*.json 2>/dev/null | sort)"
-  "$HERE/draft_session.sh" "$CODE" >>"$LOG_DIR/draft_$CODE_$TS.log" 2>&1 || {
-    echo "  ⚠ $CODE の下書き生成に失敗（ログ: draft_$CODE_$TS.log）" >&2; continue; }
+  "$HERE/draft_session.sh" "$CODE" >>"$LOG_DIR/draft_${CODE}_${TS}.log" 2>&1 || {
+    echo "  ⚠ $CODE の下書き生成に失敗（ログ: draft_${CODE}_${TS}.log）" >&2; continue; }
   AFTER="$(ls "$REPO/komoro/data"/*.json 2>/dev/null | sort)"
   NEWJSON="$(comm -13 <(echo "$BEFORE") <(echo "$AFTER") | head -1)"
   # 既存slugを上書き生成したケースも拾う: 直近1分で更新された json
