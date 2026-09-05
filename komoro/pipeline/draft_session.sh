@@ -44,6 +44,12 @@ PROMPT="$(cat "$HERE/draft_prompt.md")
 作業を開始してください。"
 
 cd "$REPO"
+# launchd 等の無人実行では対話ログインのOAuthが切れるため、長寿命トークン（claude setup-token で発行、
+# ~/.claude/.headless_token に保存）を注入する。scratch の 06_基盤/automation/claude_headless.py と同じ方式。
+HEADLESS_TOKEN_FILE="$HOME/.claude/.headless_token"
+if [[ -f "$HEADLESS_TOKEN_FILE" ]]; then
+  export CLAUDE_CODE_OAUTH_TOKEN="$(tr -d '[:space:]' < "$HEADLESS_TOKEN_FILE")"
+fi
 # Read/Write のみ許可（ネット送信やコマンド実行はさせない）。権限確認をスキップして headless 実行。
 claude -p "$PROMPT" \
   --allowedTools "Read" "Write" \
