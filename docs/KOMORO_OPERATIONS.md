@@ -83,13 +83,21 @@ set -a && . ./.env && set +a
 - GitHub: `thunder-19900512/mirai-gikai-komoro`（**まずprivate**。AGPLの公開義務はサイト公開時までに public 化＝人間判断）に `komoro-fork` を push 済。`origin` 登録済
 - Vercel: `mirai-gikai-komoro-web`（root `web`）／`mirai-gikai-komoro-admin`（root `admin`）作成・GitHub連携済。Production の環境変数は投入済（Supabase URL/publishable, AI_GATEWAY_API_KEY, REVALIDATE_SECRET, ADMIN_URL, NEXT_PUBLIC_*_URL, コスト上限, webのBASIC_AUTH_USER=komoro＋パスワード, adminのADMIN_MCP_TOKEN）。生成した値の控えは repo ルートの `.env` 末尾 `PROD_*`（gitignore済）
 
-**残り（山田の手＝自動モードでブロックされた「本番への書き込み」系）**
-1. DBスキーマ投入: `npx supabase login && npx supabase link --project-ref uefyokvrlhmprltozgnh && npx supabase db push`
-2. `SUPABASE_SECRET_KEY`（service_role）を Supabase ダッシュボード > Settings > API Keys から取り、web/admin 両方の Vercel 環境変数に追加（ダッシュボードでしか見えない）
-3. 初回デプロイ: `cd web && npx vercel deploy --prod` ／ `cd admin && npx vercel deploy --prod`（以後は push で自動。git push で発火しない場合は GitHub > Settings > Applications > Vercel でこのリポジトリへのアクセスを許可）
-4. admin ログイン用 Google OAuth を Supabase Authentication > Providers で有効化（`ADMIN_AUTH_CALLBACK_URL` = `https://mirai-gikai-komoro-admin.vercel.app/api/auth/callback`）
-5. `komoro/pipeline/.env` に本番の `SUPABASE_URL` / `SUPABASE_SECRET_KEY` / `ADMIN_URL` → §5 の launchd を有効化
-6. 内容を詰めたら Basic 認証を外し、GitHub リポジトリを public に（AGPL）
+**2026-09-06 夜に完了**
+- ✅ DBスキーマ: `supabase link` + `db push` 93本（山田）
+- ✅ `SUPABASE_SECRET_KEY` を web/admin の Vercel に登録（Sensitive 扱い＝あとから取り出せないので、必要なら再度ダッシュボードからコピー）
+- ✅ 初回デプロイ: web https://mirai-gikai-komoro-web.vercel.app（Basic認証 user=komoro）／admin https://mirai-gikai-komoro-admin.vercel.app
+  - ハマり: `web/` 内で `vercel deploy` → 「Root Directory "web" does not exist」→ repo ルートで `vercel link --repo`（モノレポ連結）に切替で解決
+  - ハマり: web だけ Framework Preset が None で公開URLがエッジ 404 → API で `framework=nextjs` に設定して再デプロイで解決
+  - Basic認証は HTML ナビゲーションだけ掛かる仕様（curl の `*/*` は素通し。ブラウザは 401）
+- ✅ 議案データ投入（全件 draft）: 令和7年9月 5件／12月 36件／一般質問 18件 → bills 59・bill_contents 118・tags 13
+- ✅ `komoro/pipeline/.env` 本番化（chmod 600）＋ launchd `com.yamada.mirai-gikai-komoro` ロード
+- ✅ `draft_session.sh` に長寿命トークン注入（無人実行でOAuth切れしない）
+
+**残り（山田）**
+1. admin ログイン用 Google OAuth を Supabase Authentication > Providers で有効化（`ADMIN_AUTH_CALLBACK_URL` = `https://mirai-gikai-komoro-admin.vercel.app/api/auth/callback`）。これが無いと admin で公開操作ができない
+2. admin で内容レビュー → 公開（人間の判断）
+3. サイト公開のタイミングで Basic 認証を外し、GitHub リポジトリを public に（AGPL）
 
 ## 5. 自動更新の有効化（デプロイ後）
 
