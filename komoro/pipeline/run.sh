@@ -17,6 +17,8 @@ REPO="$(cd "$HERE/../.." && pwd)"
 LOG_DIR="$HERE/logs"; mkdir -p "$LOG_DIR"
 TS="$(date +%Y%m%d_%H%M%S)"
 TSX="$REPO/packages/seed/node_modules/.bin/tsx"
+# 通知メールは google ライブラリ入りの CLT python で送る（Homebrew の python3 には入っていない）
+PY_NOTIFY="/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9"; [[ -x "$PY_NOTIFY" ]] || PY_NOTIFY=python3
 ADMIN_URL="${ADMIN_URL:-http://localhost:3001}"
 
 # --- env 読み込み（pipeline/.env 優先、無ければ repo/.env） ---
@@ -87,6 +89,6 @@ echo "$SUMMARY_ITEMS" | python3 -c '
 import sys, json, os
 items = [json.loads(l) for l in sys.stdin if l.strip()]
 print(json.dumps({"sessions": items, "admin_url": os.environ.get("ADMIN_URL","http://localhost:3001"), "error": None}, ensure_ascii=False))
-' ADMIN_URL="$ADMIN_URL" | python3 "$HERE/notify.py" 2>>"$LOG_DIR/notify.log"
+' ADMIN_URL="$ADMIN_URL" | "$PY_NOTIFY" "$HERE/notify.py" 2>>"$LOG_DIR/notify.log"
 
 echo "✔ [$TS] pipeline done" >&2
