@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """みらい議会＠小諸市：ドラフト投入完了メールを山田宛に送る小物。
 
-scratch/automation/notify_mail.py（receipt-bot認証を流用する共通ヘルパー）を再利用する。
+scratch/06_基盤/automation/notify_mail.py（receipt-bot認証を流用する共通ヘルパー）を再利用する。
 標準入力から JSON（run.sh が渡すサマリ）を受け取り、HTMLメールを送る。
 
 JSON 形式:
@@ -14,7 +14,7 @@ import os
 import sys
 
 # scratch の共通メールヘルパーを import できるようにパスを通す
-SCRATCH_AUTOMATION = os.path.expanduser("~/.gemini/antigravity/scratch/automation")
+SCRATCH_AUTOMATION = os.path.expanduser("~/.gemini/antigravity/scratch/06_基盤/automation")
 sys.path.insert(0, SCRATCH_AUTOMATION)
 
 
