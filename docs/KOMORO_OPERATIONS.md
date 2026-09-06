@@ -93,6 +93,7 @@ set -a && . ./.env && set +a
 - ✅ 議案データ投入（全件 draft）: 令和7年9月 5件／12月 36件／一般質問 18件 → bills 59・bill_contents 118・tags 13
 - ✅ `komoro/pipeline/.env` 本番化（chmod 600）＋ launchd `com.yamada.mirai-gikai-komoro` ロード
 - ✅ `draft_session.sh` に長寿命トークン注入（無人実行でOAuth切れしない）
+- ✅ 週次パイプライン試運転（2026-09-06）: 新着4PDF検知 → 令和8年6月定例会19件・9月定例会29件を自動下書き→draft投入→レビュー依頼メール到着。直したバグ3つ＝①`run.sh` の `$CODE_$TS`（zshで未定義変数扱い）②`notify.py` の scratch パスが再構成前 ③通知は google ライブラリ入りの CLT python3.9 で送る必要（Homebrew python3 には無い）。※失敗時は `state/seen_pdfs.json` から該当URLを消せば再処理される
 
 **残り（山田）**
 1. admin ログイン用 Google OAuth を Supabase Authentication > Providers で有効化（`ADMIN_AUTH_CALLBACK_URL` = `https://mirai-gikai-komoro-admin.vercel.app/api/auth/callback`）。これが無いと admin で公開操作ができない
