@@ -45,6 +45,7 @@
 - `run.sh` … オーケストレータ（fetch→draft→import→notify）
 - `notify.py` … 完了メール（scratch の notify_mail.py 流用）
 - `com.yamada.mirai-gikai-komoro.plist` … launchd定義（毎週月7:15）
+- `keepalive.sh` ＋ `com.yamada.mirai-gikai-komoro-keepalive.plist` … 本番Supabaseに毎日12:10に軽いREST問い合わせ。Free プランは7日間アクセスが無いと一時停止されるため（2026-09-14 停止予告メールを受けて追加。週次の run.sh は新着が無い週はDBに触らない）。ログは `logs/keepalive.log`
 
 ## 3. ローカル開発
 
