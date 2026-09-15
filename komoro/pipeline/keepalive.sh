@@ -9,6 +9,6 @@ TS=$(date +%Y%m%d_%H%M%S)
 CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
   "${SUPABASE_URL}/rest/v1/bills?select=id&limit=1" \
   -H "apikey: ${SUPABASE_SECRET_KEY}" \
-  -H "Authorization: Bearer ${SUPABASE_SECRET_KEY}" || echo "000")
+  -H "Authorization: Bearer ${SUPABASE_SECRET_KEY}") || CODE="000"
 echo "[${TS}] keepalive HTTP ${CODE}"
 [[ "$CODE" == "200" ]]
