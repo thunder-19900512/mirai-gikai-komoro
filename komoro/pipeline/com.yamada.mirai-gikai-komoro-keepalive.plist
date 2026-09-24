@@ -9,14 +9,13 @@
         <string>/bin/zsh</string>
         <string>/Users/yamadayuji/deploy/mirai-gikai-komoro/komoro/pipeline/keepalive.sh</string>
     </array>
-    <!-- Supabase Free の7日無アクセス停止を防ぐ。毎日 12:10（スリープ中なら復帰時に1回実行） -->
+    <!-- Supabase Free の7日無アクセス停止を防ぐ。1日3回（スリープ中なら復帰時に1回実行） -->
     <key>StartCalendarInterval</key>
-    <dict>
-        <key>Hour</key>
-        <integer>12</integer>
-        <key>Minute</key>
-        <integer>10</integer>
-    </dict>
+    <array>
+        <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>10</integer></dict>
+        <dict><key>Hour</key><integer>14</integer><key>Minute</key><integer>10</integer></dict>
+        <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>10</integer></dict>
+    </array>
     <key>StandardOutPath</key>
     <string>/Users/yamadayuji/deploy/mirai-gikai-komoro/komoro/pipeline/logs/keepalive.log</string>
     <key>StandardErrorPath</key>
