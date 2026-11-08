@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+import urllib.error
 import urllib.request
 import urllib.parse
 
@@ -54,10 +55,31 @@ def _post(path: str, params: dict) -> dict:
     return json.loads(raw)
 
 
-def list_councils():
-    d = _post("councils/view", {"tenant_id": TENANT})
-    for c in d.get("councils", d.get("tenant_councils", [])):
-        print(c.get("council_id"), c.get("council_name") or c.get("name"))
+def list_councils(start: int = 130, end: int = 170):
+    """会期一覧を出す。
+
+    注意: `councils/view` は 400 を返す（2026-11-08確認）。代わりに
+    `minutes/get_schedule_all` を council_id で走査し、開催日から会期を判別する。
+    未公開/存在しない council_id は 403 を返すので、そこで打ち切る。
+    """
+    found = 0
+    for cid in range(start, end + 1):
+        try:
+            d = _post("minutes/get_schedule_all", {"tenant_id": TENANT, "council_id": cid})
+        except urllib.error.HTTPError as e:
+            if e.code == 403:
+                # 403 が続いたら以降は未公開とみなして終了
+                if found:
+                    break
+                continue
+            raise
+        sch = d.get("schedules_and_materials") or []
+        if not sch:
+            continue
+        found += 1
+        print(f"council_id={cid}  {len(sch)}日  {sch[0]['name']} 〜 {sch[-1]['name']}")
+        for x in sch:
+            print(f"    schedule_id={x['schedule_id']}  {x['name']}")
 
 
 def minute_text(council_id: int, schedule_id: int) -> str:
