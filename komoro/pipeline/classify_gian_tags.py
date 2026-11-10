@@ -33,7 +33,9 @@ RULES = [
     ("廃棄物",               "環境・鳥獣"),
     ("再生利用",             "環境・鳥獣"),
     ("動植物の保護",         "環境・鳥獣"),
-    ("動物園",               "環境・鳥獣"),
+    # 動物園は懐古園（小諸公園）内の観光・展示施設なので文化・歴史に寄せる。
+    # 環境・鳥獣は野生動物・環境保全（動植物保護条例・廃棄物条例）の文脈で使うタグ。
+    ("動物園",               "文化・歴史"),
     # 文化・歴史
     ("公民館",               "文化・歴史"),
     ("文化会館",             "文化・歴史"),
@@ -124,13 +126,24 @@ def apply_session(session_slug):
     import urllib.parse
     tags = {t["label"]: t["id"] for t in _req("tags?select=id,label")}
     q = urllib.parse.quote(f"{session_slug}%")
-    bills = _req(f"bills?select=id,slug,name&slug=like.{q}")
+    # bill_contents.summary も一緒に引く。議案名だけでは施設や事業の中身が分からないことがあり、
+    # 後段の tag_audit.sh（規則の取りこぼし点検）がこれを手がかりにする。
+    bills = _req(
+        f"bills?select=id,slug,name,bill_contents(summary,difficulty_level)&slug=like.{q}"
+    )
     gian = [b for b in bills if "ippan" not in (b["slug"] or "")]
 
     rows, result, untagged = [], [], []
     for b in gian:
         labels = classify(b["name"])
-        result.append({"id": b["id"], "slug": b["slug"], "name": b["name"], "tags": labels})
+        # normal（やさしい方）の summary を点検用に添える
+        summary = ""
+        for c in b.get("bill_contents") or []:
+            if c.get("difficulty_level") == "normal" and c.get("summary"):
+                summary = c["summary"]
+                break
+        result.append({"id": b["id"], "slug": b["slug"], "name": b["name"],
+                       "tags": labels, "summary": summary})
         if not labels:
             untagged.append(b["name"])
         for lab in labels:
