@@ -7,7 +7,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/bin/zsh</string>
-        <string>/Users/yamadayuji/mirai-gikai-komoro/komoro/pipeline/run.sh</string>
+        <string>/Users/yamadayuji/deploy/mirai-gikai-komoro/komoro/pipeline/run.sh</string>
     </array>
     <!-- 定例会は年4回。毎週月曜 7:15 に新着チェック（新着が無い週は静かに終了） -->
     <key>StartCalendarInterval</key>
@@ -20,9 +20,9 @@
         <integer>15</integer>
     </dict>
     <key>StandardOutPath</key>
-    <string>/Users/yamadayuji/mirai-gikai-komoro/komoro/pipeline/logs/launchd.out.log</string>
+    <string>/Users/yamadayuji/deploy/mirai-gikai-komoro/komoro/pipeline/logs/launchd.out.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/yamadayuji/mirai-gikai-komoro/komoro/pipeline/logs/launchd.err.log</string>
+    <string>/Users/yamadayuji/deploy/mirai-gikai-komoro/komoro/pipeline/logs/launchd.err.log</string>
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>

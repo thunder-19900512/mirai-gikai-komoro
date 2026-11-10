@@ -101,17 +101,82 @@ def classify(name):
             out.append(tag)
     return out
 
-if __name__ == "__main__":
-    bills = json.load(open(sys.argv[1]))
+# ---------------------------------------------------------------------------
+# Supabase 反映
+# ---------------------------------------------------------------------------
+
+def _req(path, method="GET", body=None, prefer=None):
+    import os, urllib.request
+    url, key = os.environ["SUPABASE_URL"], os.environ["SUPABASE_SECRET_KEY"]
+    h = {"apikey": key, "Authorization": f"Bearer {key}", "Content-Type": "application/json"}
+    if prefer:
+        h["Prefer"] = prefer
+    d = json.dumps(body).encode() if body is not None else None
+    r = urllib.request.Request(f"{url}/rest/v1/{path}", data=d, headers=h, method=method)
+    with urllib.request.urlopen(r) as resp:
+        t = resp.read().decode()
+        return json.loads(t) if t.strip() else []
+
+
+def apply_session(session_slug):
+    """指定会期の議案を分類して bills_tags に upsert する。一般質問は対象外
+    （一般質問は data/*-ippanshitsumon.json に手書きのtagsが入っており、import時に反映済み）。"""
+    import urllib.parse
+    tags = {t["label"]: t["id"] for t in _req("tags?select=id,label")}
+    q = urllib.parse.quote(f"{session_slug}%")
+    bills = _req(f"bills?select=id,slug,name&slug=like.{q}")
     gian = [b for b in bills if "ippan" not in (b["slug"] or "")]
-    res = []
+
+    rows, result, untagged = [], [], []
     for b in gian:
-        res.append({"id": b["id"], "slug": b["slug"], "name": b["name"], "tags": classify(b["name"])})
-    json.dump(res, open(sys.argv[2], "w"), ensure_ascii=False, indent=1)
-    unt = [r for r in res if not r["tags"]]
-    print(f"議案 {len(res)}件 / 未分類 {len(unt)}件")
-    for r in res:
-        print(f"  {'/'.join(r['tags']) or '★未分類':<32} {r['name'][:60]}")
+        labels = classify(b["name"])
+        result.append({"id": b["id"], "slug": b["slug"], "name": b["name"], "tags": labels})
+        if not labels:
+            untagged.append(b["name"])
+        for lab in labels:
+            if lab in tags:
+                rows.append({"bill_id": b["id"], "tag_id": tags[lab]})
+
+    if rows:
+        _req("bills_tags", "POST", rows,
+             prefer="resolution=merge-duplicates,return=minimal")
+
+    print(f"  タグ付与: 議案{len(gian)}件 / 紐付け{len(rows)}行 / 未分類{len(untagged)}件",
+          file=sys.stderr)
+    for n in untagged:
+        print(f"    ★未分類: {n}", file=sys.stderr)
+    return result
+
+
+def usage():
+    print(__doc__, file=sys.stderr)
+    print("""使い方:
+  classify_gian_tags.py <bills.json> <out.json>     オフライン分類（確認・再現用）
+  classify_gian_tags.py --apply <session-slug>      本番DBの該当会期にタグを付与
+                                                    （結果JSONをstdoutに出す）
+  SUPABASE_URL / SUPABASE_SECRET_KEY が必要（pipeline/.env）。""", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    args = sys.argv[1:]
+    if not args:
+        usage(); sys.exit(1)
+    if args[0] == "--apply":
+        if len(args) < 2:
+            usage(); sys.exit(1)
+        json.dump(apply_session(args[1]), sys.stdout, ensure_ascii=False)
+    elif len(args) >= 2:
+        bills = json.load(open(args[0]))
+        gian = [b for b in bills if "ippan" not in (b["slug"] or "")]
+        res = [{"id": b["id"], "slug": b["slug"], "name": b["name"],
+                "tags": classify(b["name"])} for b in gian]
+        json.dump(res, open(args[1], "w"), ensure_ascii=False, indent=1)
+        unt = [r for r in res if not r["tags"]]
+        print(f"議案 {len(res)}件 / 未分類 {len(unt)}件")
+        for r in res:
+            print(f"  {'/'.join(r['tags']) or '★未分類':<32} {r['name'][:60]}")
+    else:
+        usage(); sys.exit(1)
 
 # ---------------------------------------------------------------------------
 # 【小諸版】議案にテーマタグを付けるための分類器。

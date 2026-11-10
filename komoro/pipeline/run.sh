@@ -5,7 +5,9 @@
 #   2) 新着を会期コード(R0712 等)ごとにまとめ、draft_session.sh で claude が原典PDFから
 #      議案データJSONを下書き生成（data/<slug>.json）
 #   3) import-session.ts で Supabase に draft（非公開）投入
-#   4) notify.py で山田に「要レビュー・公開待ち」メール
+#   3.5) classify_gian_tags.py --apply で議案にテーマタグを付与（トップのテーマ別セクション用）
+#   3.6) tag_audit.sh で claude に規則の取りこぼしを点検させる（報告のみ・付け替えはしない）
+#   4) notify.py で山田に「要レビュー・公開待ち」メール（点検結果も同封）
 #
 # 公開は行わない（他者が閲覧する公開物なので、最後の公開判断は必ず人間）。
 #
@@ -74,12 +76,37 @@ for CODE in "${CODES[@]}"; do
   IMPORT_OUT="$("$TSX" "$REPO/komoro/import-session.ts" "$NEWJSON" 2>&1)"
   echo "$IMPORT_OUT" >&2
 
+  # 3.5) テーマタグを付与（議案はJSONにtagsを持たないため、投入後に規則で分類して紐付ける）
+  #      一般質問は data/*-ippanshitsumon.json に手書きtagsがあり import 時に反映済みなので対象外。
+  #      これをやらないと新しい議案がトップのテーマ別セクションに出てこない。
+  SLUG="$(basename "$NEWJSON" .json)"
+  mkdir -p "$HERE/state"
+  TAGS_JSON="$HERE/state/tags_${SLUG}.json"
+  AUDIT_JSON="$HERE/state/tagaudit_${SLUG}.json"
+  if python3 "$HERE/classify_gian_tags.py" --apply "$SLUG" > "$TAGS_JSON" 2>>"$LOG_DIR/tags_${TS}.log"; then
+    echo "  タグ付与OK: $TAGS_JSON" >&2
+    # 3.6) 規則の取りこぼしを claude に点検させる（付け替えはせず報告のみ。失敗しても処理は続ける）
+    rm -f "$AUDIT_JSON"
+    "$HERE/tag_audit.sh" "$TAGS_JSON" "$AUDIT_JSON" >>"$LOG_DIR/tagaudit_${TS}.log" 2>&1 || \
+      echo "  ⚠ タグ点検に失敗（ログ: tagaudit_${TS}.log）。タグ自体は付与済み。" >&2
+  else
+    echo "  ⚠ タグ付与に失敗（ログ: tags_${TS}.log）。議案はテーマ別セクションに出ません。" >&2
+    rm -f "$TAGS_JSON"
+  fi
+
   # サマリ抽出（import の ✅ 行）
   RESULTS="$(echo "$IMPORT_OUT" | grep '✅' | sed 's/^[[:space:]]*✅[[:space:]]*//')"
-  ITEM="$(SLUG="$(basename "$NEWJSON" .json)" RES="$RESULTS" python3 -c '
+  ITEM="$(SLUG="$SLUG" RES="$RESULTS" AUDIT="$AUDIT_JSON" python3 -c '
 import os, json
 res = [l for l in os.environ.get("RES","").splitlines() if l.strip()]
-print(json.dumps({"slug": os.environ["SLUG"], "name": os.environ["SLUG"], "bill_count": len(res), "results": res}, ensure_ascii=False))
+out = {"slug": os.environ["SLUG"], "name": os.environ["SLUG"], "bill_count": len(res), "results": res}
+p = os.environ.get("AUDIT","")
+if p and os.path.exists(p):
+    try:
+        out["tag_audit"] = json.load(open(p))
+    except Exception as e:
+        out["tag_audit_error"] = str(e)
+print(json.dumps(out, ensure_ascii=False))
 ')"
   SUMMARY_ITEMS+="$ITEM"$'\n'
 done
