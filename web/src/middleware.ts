@@ -28,7 +28,11 @@ export async function middleware(request: NextRequest) {
   // URLパラメータからdifficulty Cookieをセット
   _applyDifficultyCookie(request, response);
 
-  const authConfig = getBasicAuthConfig();
+  // 【小諸版】一般公開中のため、Basic認証は既定で無効。
+  // 再び閉じたいときは Vercel の環境変数に BASIC_AUTH_ENABLED=true を足す
+  // （BASIC_AUTH_USER / BASIC_AUTH_PASSWORD と併せて）。
+  const authConfig =
+    process.env.BASIC_AUTH_ENABLED === "true" ? getBasicAuthConfig() : null;
 
   // Basic認証の設定がない場合はスキップ
   if (!authConfig) {
